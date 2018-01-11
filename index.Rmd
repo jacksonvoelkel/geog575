@@ -18,7 +18,6 @@ knitr::opts_chunk$set(echo = TRUE)
 setwd("C:/Users/jvoelkel/Google\ Drive/Teaching/GEOG_4575")
 ```
 
-
 # GIS Data Management
 
 ##
@@ -58,9 +57,23 @@ Models of the "real world".
 
 <img src='http://jacksonvoelkel.com/geog575/images/ESRI_GIS_Stack.jpg'>
 
+##
+
+<div class="stretch">
+  <iframe style="width:100%;height:100%;" src="https://www.portlandmaps.com">
+  </iframe>
+</div>
+
 ## Open Source Stack
 
 <img src='http://jacksonvoelkel.com/geog575/images/OS_GIS_Stack.jpg'>
+
+##
+
+<div class="stretch">
+  <iframe style="width:100%;height:100%;" src="http://cmap.clackamas.us/maps/cmap">
+  </iframe>
+</div>
 
 # What is a 'relation'?
 
@@ -252,9 +265,14 @@ gis=# \l
  gis       | postgres | <font style='color:orange'>UTF8</font>     | en_US.UTF-8 | en_US.UTF-8 | 
 </pre>
 
+##
+
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
   $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});
   $("img").each(function(){$(this).replaceWith($('<img src=' + this.src + '>' + this.innerHTML + '</img>'));});
   $("li").addClass("fragment");
 </script>
+
+
+

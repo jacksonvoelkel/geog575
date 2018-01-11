@@ -493,24 +493,34 @@ Digital Compliation and Database Design
 </section><section id="esri-stack" class="slide level2">
 <h2>ESRI Stack</h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/ESRI_GIS_Stack.jpg'></p>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><iframe style="width:100%;height:100%;" src="https://www.portlandmaps.com"> </iframe></p>
+</div>
 </section><section id="open-source-stack" class="slide level2">
 <h2>Open Source Stack</h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/OS_GIS_Stack.jpg'></p>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><iframe style="width:100%;height:100%;" src="http://cmap.clackamas.us/maps/cmap"> </iframe></p>
+</div>
 </section></section>
-<section><section id="what-is-a-relation" class="titleslide slide level1"><h1>What is a ‘relation’?</h1></section><section id="section-6" class="slide level2">
+<section><section id="what-is-a-relation" class="titleslide slide level1"><h1>What is a ‘relation’?</h1></section><section id="section-8" class="slide level2">
 <h2></h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/database_diagram-Relations.png'></p>
-</section><section id="section-7" class="slide level2">
+</section><section id="section-9" class="slide level2">
 <h2></h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/data_model_tiger.png'></p>
 </section><section id="cardinality" class="slide level2">
 <h2>Cardinality</h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/cardinality_graphical.png'></p>
-</section><section id="section-8" class="slide level2">
+</section><section id="section-10" class="slide level2">
 <h2></h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/cardinality.png'></p>
 </section></section>
-<section><section id="how-does-the-data-get-stored" class="titleslide slide level1"><h1>How does the data get stored?</h1></section><section id="section-9" class="slide level2">
+<section><section id="how-does-the-data-get-stored" class="titleslide slide level1"><h1>How does the data get stored?</h1></section><section id="section-11" class="slide level2">
 <h2></h2>
 <pre style="font-family:courier;font-size:12pt">
 geog575=# \d countries
@@ -547,7 +557,7 @@ Check constraints:
   "enforce_geotype_the_geom" CHECK (geometrytype(the_geom) = 'MULTIPOLYGON' OR the_geom IS NULL)
   "enforce_srid_the_geom" CHECK (st_srid(the_geom) = 3995)
 </pre>
-</section><section id="section-10" class="slide level2">
+</section><section id="section-12" class="slide level2">
 <h2></h2>
 <pre style="font-family:courier;font-size:12pt">
 geog575=# \d countries
@@ -610,13 +620,13 @@ Binary Numbers
 14          | 1110      |      4
 15          | 1111      |      4
 </pre>
-</section><section id="section-11" class="slide level2">
+</section><section id="section-13" class="slide level2">
 <h2></h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/number_types.png'></p>
 </section><section id="ascii" class="slide level2">
 <h2>ASCII</h2>
 <p><font style='color:orange'>A</font>merican <font style='color:orange'>S</font>tandards <font style='color:orange'>C</font>ode for <font style='color:orange'>I</font>nformation <font style='color:orange'>I</font>nterchange</p>
-</section><section id="section-12" class="slide level2">
+</section><section id="section-14" class="slide level2">
 <h2></h2>
 <p>128 Characters:</p>
 <pre style="font-family:courier;font-size:12pt">
@@ -659,10 +669,10 @@ Char  Dec  Oct  Hex | Char  Dec  Oct  Hex | Char  Dec  Oct  Hex | Char Dec  Oct 
 <h2>UTF</h2>
 <p><font style='color:orange'>U</font>nicode (Universal Coded Character Set) <font style='color:orange'>T</font>ransformation <font style='color:orange'>F</font>ormat</p>
 <p>1,112,064 Characters!</p>
-</section><section id="section-13" class="slide level2">
+</section><section id="section-15" class="slide level2">
 <h2></h2>
 <p><img src='http://jacksonvoelkel.com/geog575/images/utf8_use.png'></p>
-</section><section id="section-14" class="slide level2">
+</section><section id="section-16" class="slide level2">
 <h2></h2>
 <pre style="font-family:courier;font-size:12pt">
 gis=# \l
@@ -671,6 +681,8 @@ gis=# \l
 -----------+----------+----------+-------------+-------------+-----------------------
  gis       | postgres | <font style='color:orange'>UTF8</font>     | en_US.UTF-8 | en_US.UTF-8 | 
 </pre>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
   $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});
