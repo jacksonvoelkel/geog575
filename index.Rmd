@@ -14,10 +14,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r echo=FALSE}
-setwd("C:/Users/jvoelkel/Google\ Drive/Teaching/GEOG_4575")
-```
-
 # GIS Data Management
 
 ##
@@ -28,6 +24,12 @@ setwd("C:/Users/jvoelkel/Google\ Drive/Teaching/GEOG_4575")
 ##
 
 A very large, <font style='color:orange'>integrated</font> collection of data.
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+    .reveal section img { background:none; border:none; box-shadow:none; }
+</style>
 
 ##
 
