@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content=" Instructor: Jackson Voelkel (jvoelkel@pdx.edu)" />
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="index_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="index_files/reveal.js-3.3.0.1/css/theme/black.css" id="theme">
+
+<style type="text/css">
+.reveal section img {
+  background: rgba(255, 255, 255, 0.85);
+}
+</style>
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">GEOG 4/575: <br>
+<h2>
+Digital Compliation and Database Design
+<h2></h1>
+    <h2 class="author"><br>Instructor: Jackson Voelkel (<a href='mailto:jvoelkel@pdx.edu' target='_blank'>jvoelkel@pdx.edu</a>)</h2>
+    <h3 class="date">Winter 2018</h3>
+</section>
+
+<section><section id="gis-data-management" class="titleslide slide level1"><h1>GIS Data Management</h1></section><section id="section" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/clutter.jpg'></p>
+</section></section>
+<section><section id="database---definition" class="titleslide slide level1"><h1>Database - Definition</h1></section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>A very large, <font style='color:orange'>integrated</font> collection of data.</p>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p>A <font style='color:orange'>shared</font> collection of logically related data designed to meet the information needs of an organization.</p>
+<ul>
+<li>User doesn’t need to know how data are physically stored</li>
+<li>Requires access control, etc.</li>
+</ul>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p>Models of the “real world”.</p>
+<ul>
+<li>Entities (e.g. students, courses)</li>
+<li>Relationships (e.g. ‘Jackson <font style='color:magenta'>[person]</font> likes Pizza <font style='color:magenta'>[food]</font>’)</li>
+</ul>
+</section></section>
+<section><section id="what-does-a-database-do" class="titleslide slide level1"><h1>What Does a Database Do?</h1></section><section id="section-4" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/data_model1.png'></p>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/DBMS.jpg'></p>
+</section><section id="esri-stack" class="slide level2">
+<h2>ESRI Stack</h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/ESRI_GIS_Stack.jpg'></p>
+</section><section id="open-source-stack" class="slide level2">
+<h2>Open Source Stack</h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/OS_GIS_Stack.jpg'></p>
+</section></section>
+<section><section id="what-is-a-relation" class="titleslide slide level1"><h1>What is a ‘relation’?</h1></section><section id="section-6" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/database_diagram-Relations.png'></p>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/data_model_tiger.png'></p>
+</section><section id="cardinality" class="slide level2">
+<h2>Cardinality</h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/cardinality_graphical.png'></p>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/cardinality.png'></p>
+</section></section>
+<section><section id="how-does-the-data-get-stored" class="titleslide slide level1"><h1>How does the data get stored?</h1></section><section id="section-9" class="slide level2">
+<h2></h2>
+<pre style="font-family:courier;font-size:12pt">
+geog575=# \d countries
+                                   Table "public.countries"
+   Column   |         Type          |                        Modifiers                        
+------------+-----------------------+---------------------------------------------------------
+ gid        | integer               | not null default nextval('countries_gid_seq'::regclass)
+ fips_cntry | character varying(2)  | 
+ gmi_cntry  | character varying(3)  | 
+ iso_2digit | character varying(2)  | 
+ iso_3digit | character varying(3)  | 
+ iso_num    | smallint              | 
+ cntry_name | character varying(40) | 
+ long_name  | character varying(40) | 
+ isoshrtnam | character varying(45) | 
+ unshrtnam  | character varying(55) | 
+ locshrtnam | character varying(43) | 
+ loclngnam  | character varying(74) | 
+ status     | character varying(60) | 
+ pop2007    | double precision      | 
+ sqkm       | double precision      | 
+ sqmi       | double precision      | 
+ land_sqkm  | integer               | 
+ colormap   | smallint              | default 0
+ the_geom   | geometry              | 
+
+Indexes:
+ "countries_pkey" PRIMARY KEY, btree (gid)
+Check constraints:
+  "countries_sqkm_check" CHECK (sqkm > 0::double precision)
+  "countries_sqmi_check" CHECK (sqmi > 0::double precision)
+  "countries_cntry_name_check" CHECK (cntry_name::text !~ '[^a-zA-Z.&, ''-]'::text)
+  "enforce_dims_the_geom" CHECK (st_ndims(the_geom) = 2)
+  "enforce_geotype_the_geom" CHECK (geometrytype(the_geom) = 'MULTIPOLYGON' OR the_geom IS NULL)
+  "enforce_srid_the_geom" CHECK (st_srid(the_geom) = 3995)
+</pre>
+</section><section id="section-10" class="slide level2">
+<h2></h2>
+<pre style="font-family:courier;font-size:12pt">
+geog575=# \d countries
+                                   Table "public.countries"
+   Column   |         Type          |                        Modifiers                        
+------------+-----------------------+---------------------------------------------------------
+ gid        | <font style='color:magenta'>integer</font>               | not null default nextval('countries_gid_seq'::regclass)
+ fips_cntry | <font style='color:lightgreen'>character</font> varying(2)  | 
+ gmi_cntry  | character varying(3)  | 
+ iso_2digit | character varying(2)  | 
+ iso_3digit | character varying(3)  | 
+ iso_num    | <font style='color:magenta'>smallint</font>              | 
+ cntry_name | character varying(40) | 
+ long_name  | character varying(40) | 
+ isoshrtnam | character varying(45) | 
+ unshrtnam  | character varying(55) | 
+ locshrtnam | character varying(43) | 
+ loclngnam  | character varying(74) | 
+ status     | character varying(60) | 
+ pop2007    | <font style='color:magenta'>double precision</font>      | 
+ sqkm       | double precision      | 
+ sqmi       | double precision      | 
+ land_sqkm  | integer               | 
+ colormap   | smallint              | default 0
+ the_geom   | <font style='color:red'>geometry</font>              | 
+
+Indexes:
+ "countries_pkey" PRIMARY KEY, btree (gid)
+Check constraints:
+  "countries_sqkm_check" CHECK (sqkm > 0::double precision)
+  "countries_sqmi_check" CHECK (sqmi > 0::double precision)
+  "countries_cntry_name_check" CHECK (cntry_name::text !~ '[^a-zA-Z.&, ''-]'::text)
+  "enforce_dims_the_geom" CHECK (st_ndims(the_geom) = 2)
+  "enforce_geotype_the_geom" CHECK (geometrytype(the_geom) = 'MULTIPOLYGON' OR the_geom IS NULL)
+  "enforce_srid_the_geom" CHECK (st_srid(the_geom) = 3995)
+</pre>
+</section><section id="representing-numbers" class="slide level2">
+<h2>Representing Numbers</h2>
+<h4>
+Binary Numbers
+</h4>
+<pre style="font-family:courier;font-size:12pt">
+
+   Number   |   Code    |   Bit Depth                        
+------------+-----------+---------------
+0           | 0         |      1
+1           | 1         |      1
+2           | 10        |      2
+3           | 11        |      2
+4           | 100       |      3
+5           | 101       |      3
+6           | 110       |      3
+7           | 111       |      3
+8           | 1000      |      4
+9           | 1001      |      4
+10          | 1010      |      4
+11          | 1011      |      4
+12          | 1100      |      4
+13          | 1101      |      4
+14          | 1110      |      4
+15          | 1111      |      4
+</pre>
+</section><section id="section-11" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/number_types.png'></p>
+</section><section id="ascii" class="slide level2">
+<h2>ASCII</h2>
+<p><font style='color:orange'>A</font>merican <font style='color:orange'>S</font>tandards <font style='color:orange'>C</font>ode for <font style='color:orange'>I</font>nformation <font style='color:orange'>I</font>nterchange</p>
+</section><section id="section-12" class="slide level2">
+<h2></h2>
+<p>128 Characters:</p>
+<pre style="font-family:courier;font-size:12pt">
+Char  Dec  Oct  Hex | Char  Dec  Oct  Hex | Char  Dec  Oct  Hex | Char Dec  Oct   Hex
+-------------------------------------------------------------------------------------
+(nul)   0 0000 0x00 | (sp)   32 0040 0x20 | @      64 0100 0x40 | `      96 0140 0x60
+(soh)   1 0001 0x01 | !      33 0041 0x21 | A      65 0101 0x41 | a      97 0141 0x61
+(stx)   2 0002 0x02 | "      34 0042 0x22 | B      66 0102 0x42 | b      98 0142 0x62
+(etx)   3 0003 0x03 | #      35 0043 0x23 | C      67 0103 0x43 | c      99 0143 0x63
+(eot)   4 0004 0x04 | $      36 0044 0x24 | D      68 0104 0x44 | d     100 0144 0x64
+(enq)   5 0005 0x05 | %      37 0045 0x25 | E      69 0105 0x45 | e     101 0145 0x65
+(ack)   6 0006 0x06 | &      38 0046 0x26 | F      70 0106 0x46 | f     102 0146 0x66
+(bel)   7 0007 0x07 | '      39 0047 0x27 | G      71 0107 0x47 | g     103 0147 0x67
+(bs)    8 0010 0x08 | (      40 0050 0x28 | H      72 0110 0x48 | h     104 0150 0x68
+(ht)    9 0011 0x09 | )      41 0051 0x29 | I      73 0111 0x49 | i     105 0151 0x69
+(nl)   10 0012 0x0a | *      42 0052 0x2a | J      74 0112 0x4a | j     106 0152 0x6a
+(vt)   11 0013 0x0b | +      43 0053 0x2b | K      75 0113 0x4b | k     107 0153 0x6b
+(np)   12 0014 0x0c | ,      44 0054 0x2c | L      76 0114 0x4c | l     108 0154 0x6c
+(cr)   13 0015 0x0d | -      45 0055 0x2d | M      77 0115 0x4d | m     109 0155 0x6d
+(so)   14 0016 0x0e | .      46 0056 0x2e | N      78 0116 0x4e | n     110 0156 0x6e
+(si)   15 0017 0x0f | /      47 0057 0x2f | O      79 0117 0x4f | o     111 0157 0x6f
+(dle)  16 0020 0x10 | 0      48 0060 0x30 | P      80 0120 0x50 | p     112 0160 0x70
+(dc1)  17 0021 0x11 | 1      49 0061 0x31 | Q      81 0121 0x51 | q     113 0161 0x71
+(dc2)  18 0022 0x12 | 2      50 0062 0x32 | R      82 0122 0x52 | r     114 0162 0x72
+(dc3)  19 0023 0x13 | 3      51 0063 0x33 | S      83 0123 0x53 | s     115 0163 0x73
+(dc4)  20 0024 0x14 | 4      52 0064 0x34 | T      84 0124 0x54 | t     116 0164 0x74
+(nak)  21 0025 0x15 | 5      53 0065 0x35 | U      85 0125 0x55 | u     117 0165 0x75
+(syn)  22 0026 0x16 | 6      54 0066 0x36 | V      86 0126 0x56 | v     118 0166 0x76
+(etb)  23 0027 0x17 | 7      55 0067 0x37 | W      87 0127 0x57 | w     119 0167 0x77
+(can)  24 0030 0x18 | 8      56 0070 0x38 | X      88 0130 0x58 | x     120 0170 0x78
+(em)   25 0031 0x19 | 9      57 0071 0x39 | Y      89 0131 0x59 | y     121 0171 0x79
+(sub)  26 0032 0x1a | :      58 0072 0x3a | Z      90 0132 0x5a | z     122 0172 0x7a
+(esc)  27 0033 0x1b | ;      59 0073 0x3b | [      91 0133 0x5b | {     123 0173 0x7b
+(fs)   28 0034 0x1c | <      60 0074 0x3c | \      92 0134 0x5c | |     124 0174 0x7c
+(gs)   29 0035 0x1d | =      61 0075 0x3d | ]      93 0135 0x5d | }     125 0175 0x7d
+(rs)   30 0036 0x1e | >      62 0076 0x3e | ^      94 0136 0x5e | ~     126 0176 0x7e
+(us)   31 0037 0x1f | ?      63 0077 0x3f | _      95 0137 0x5f | (del) 127 0177 0x7f
+</pre>
+</section><section id="utf" class="slide level2">
+<h2>UTF</h2>
+<p><font style='color:orange'>U</font>nicode (Universal Coded Character Set) <font style='color:orange'>T</font>ransformation <font style='color:orange'>F</font>ormat</p>
+<p>1,112,064 Characters!</p>
+</section><section id="section-13" class="slide level2">
+<h2></h2>
+<p><img src='http://jacksonvoelkel.com/geog575/images/utf8_use.png'></p>
+</section><section id="section-14" class="slide level2">
+<h2></h2>
+<pre style="font-family:courier;font-size:12pt">
+gis=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |  Collation  |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ gis       | postgres | <font style='color:orange'>UTF8</font>     | en_US.UTF-8 | en_US.UTF-8 | 
+</pre>
+<script>
+  $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
+  $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});
+  $("img").each(function(){$(this).replaceWith($('<img src=' + this.src + '>' + this.innerHTML + '</img>'));});
+  $("li").addClass("fragment");
+</script>
+</section></section>
+    </div>
+  </div>
+
+  <script src="index_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="index_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'index_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
