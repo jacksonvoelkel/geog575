@@ -63,6 +63,7 @@ Models of the "real world".
 
 <div class="stretch">
   <iframe style="width:100%;height:100%;" src="https://www.portlandmaps.com">
+    <img src='http://jacksonvoelkel.com/geog575/images/backup_pdx_maps.png'>
   </iframe>
 </div>
 
@@ -74,6 +75,7 @@ Models of the "real world".
 
 <div class="stretch">
   <iframe style="width:100%;height:100%;" src="http://cmap.clackamas.us/maps/cmap">
+    <img src='http://jacksonvoelkel.com/geog575/images/backup_c_maps.png'>
   </iframe>
 </div>
 
