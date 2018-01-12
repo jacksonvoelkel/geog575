@@ -267,7 +267,44 @@ gis=# \l
  gis       | postgres | <font style='color:orange'>UTF8</font>     | en_US.UTF-8 | en_US.UTF-8 | 
 </pre>
 
+# Data Integrity
+
+## ACID
+
+## <font style='color:orange;text-align:left;'>A</font>tomicity
+
+Either all of a trasaction is executed or none of it is - a transaction can never be partially completed.
+
+## <font style='color:orange;text-align:left;'>A</font>tomicity
+
+<div style="font-size:22pt">
+<p class="fragment" align="left">HR's Balance is $2,000</p>
+<p class="fragment" align="left">IT's Balance is $5,000</p>
+<p class="fragment" align="left"><font style='color:lightblue;font-family:courier;'><b>00</b> UPDATE accounts SET balance=balance-1000 WHERE account_code='HR';</font></p>
+<p class="fragment" align="left"><font style='color:red;'><b>- - - POWER OUTAGE - - -</b></font></p>
+<p class="fragment" align="left"><font style='color:lightblue;font-family:courier;'><b>01</b> SELECT balance FROM accounts WHERE account_code='HR';</font></p>
+<p class="fragment" align="left">HR's Balance is $ ? <font style="color:green" class="fragment">$2,000!</font></p>
+<p class="fragment" align="left">IT's Balance is $ ? <font style="color:green" class="fragment">$5,000!</font></p>
+</div>
+
+##<font style='color:orange;text-align:left;'>C</font>onsistency
+
+Data in a database remain, before and after the transaction, in a "consistent state" as specified by the database schema and other constraints and integrity rules imposed on the database.
+
+##<font style='color:orange;text-align:left;'>I</font>solation
+
+Requires the results of simultaneous transactions to be independent of each other.
+
+<aside class="notes">Draw something on the board here!</aside>
+
+##<font style='color:orange;text-align:left;'>D</font>urability
+
+After the completion of a transaction, its results can and always will be traced even if the system fails or crashes.
+
+# Releational Theory
+
 ##
+
 
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
