@@ -325,7 +325,7 @@ What is the cardinality?
 
 <p>What could be a real 1.1 < - - - > 1.1 cardinality?</p>
 <p class="fragment">[US Citizens]1.1 < - - - > 1.1[SSN]</p>
-<p class="fragment">What could be a 0.n < - - - > 1.1?</p>
+<p class="fragment">What could be a 0.1 < - - - > 1.1?</p>
 <p class="fragment">[Observation]0.1 < - - - > 1.1[Tree Falling]?</p>
 
 # Week 1 Review: Use Cases
