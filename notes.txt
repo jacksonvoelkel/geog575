@@ -1,0 +1,55 @@
+Things to note in lecture from Churcher:
+
+- What can go wrong?
+	Plant db
+		* what could go wrong??
+			ex: “IF use1 = ‘hedging’ OR use2 = ‘hedging’ OR use3=‘hedging’.”
+			It makes it hard to ask simple questions!
+		* How to fix?
+			note: 'uses' class doesn't restrict the amount of uses for a plant! first table does
+		* How do we determine what is a use?
+			ex: pre determined list (chincilla hallucinogenic might be too specific)
+
+	Insect db
+		* What's up with this? What is the issue
+			- farm/field repeated so many times we're begging for an error
+			- date is also repeated... begging for entry errors
+		* how do we fix it?
+			- {Fields: field|farm|soil}, {Visits: visitID|field|date|conditions}, {Counts: visitID|sample|springtail|fungus_beetle}
+
+
+- Data Modeling
+	Where should we start? By looking at the form of data or the end use?
+		The data! Ensuring that we properly store data allows for many uses in the future.
+	Relationships
+		* Plants and uses... what could our cardinality be?
+		* Can anybody think up a 1.n----1.n
+			- [submarine part]1.n --- 1.n[submarine part functions]
+			- [vehicles]? --- ?[terrains]
+				[vehicles]0.n --- 1.n[places they can travel] (if we got into a black hole, we wouldn't be a vehicle any more! ... this is stupid, but valid!)
+
+	What are keys?
+
+- Initial Requirements and Use Cases
+	We need to think about what data can/should be recorded for every database we build! Get inside the head of the 'Actor'.
+	This chapter gets a little philisophical, but the main takeaway is that design of a database is important.
+		In GIS, however, we often see far more simplified uses
+			Actor:Analyst {1:enter data; 2: manipulate data; 3: create new data; 4: analyze data; 5: map data}
+			Actor:Tech {1:enter data; 2: manipulate data; 3: create new data; 4: analyze data; 5: map data}
+	
+
+- User Interface
+	Sorry, there were many words/terms you don't know!
+	Why did we read this?
+		* We take the same care to set up database inserting as we do the structure - this allows reporting and analysis to fly by
+		* Views: give use more control over what info is seen by who
+			ex: we can create a view for certain admins that allows them to see what courses a student has taken, but doesn't show them grades!
+
+
+- Lab
+
+	Question 12
+		* How did you solve it?
+
+
+		
