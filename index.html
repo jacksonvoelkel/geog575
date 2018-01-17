@@ -686,6 +686,176 @@ gis=# \l
  gis       | postgres | <font style='color:orange'>UTF8</font>     | en_US.UTF-8 | en_US.UTF-8 | 
 </pre>
 </section></section>
+<section><section id="week-1-review-what-can-go-wrong" class="titleslide slide level1"><h1>Week 1 Review: What can go wrong?</h1></section><section id="whats-wrong" class="slide level2">
+<h2>What’s wrong?</h2>
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/2_plant_db.png'></p>
+<p class="fragment">
+Find all “Hedging”: IF use1 = ‘hedging’ OR use2 = ‘hedging’ …
+</p>
+<p class="fragment">
+How many uses can we have?
+</p>
+</section><section id="how-can-we-fix-this" class="slide level2">
+<h2>How can we fix this?</h2>
+<div class="stretch fragment">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/2_plant_db2.png'></p>
+</div>
+</section><section id="how-can-we-determine-what-is-a-use" class="slide level2">
+<h2>How can we determine what is a “use”?</h2>
+<p class="fragment">
+Chinchilla hallucinogenic
+</p>
+<p class="fragment">
+Swinging like Tarzan
+</p>
+</section><section id="how-can-we-restrict-these-uses" class="slide level2">
+<h2>How can we restrict these uses?</h2>
+<p>User input, field restrictions, etc (Churcher Ch. 11)</p>
+</section><section id="whats-wrong-1" class="slide level2">
+<h2>What’s wrong?</h2>
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/2_insect_db.png'></p>
+<p class="fragment">
+Farm/Field repeated enough that errors are likely.
+</p>
+<p class="fragment">
+Date is repeated for every entry.
+</p>
+</section><section id="how-can-we-fix-this-1" class="slide level2">
+<h2>How can we fix this?</h2>
+<div class="stretch fragment">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/2_insect_db2.png'></p>
+</div>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
+<p>Why did that work? What are we actually measuring here (farms, insects, etc)?</p>
+</section></section>
+<section><section id="week-1-review-data-modeling" class="titleslide slide level1"><h1>Week 1 Review: Data Modeling</h1></section><section id="relationships" class="slide level2">
+<h2>Relationships</h2>
+<p>What is the cardinality?</p>
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/2_plant_db2.png'></p>
+</section><section id="section-18" class="slide level2">
+<h2></h2>
+<p>
+What could be a real 1.1 &lt; - - - &gt; 1.1 cardinality?
+</p>
+<p class="fragment">
+[US Citizens]1.1 &lt; - - - &gt; 1.1[SSN]
+</p>
+<p class="fragment">
+What could be a 0.n &lt; - - - &gt; 1.1?
+</p>
+<p class="fragment">
+[Observation]0.1 &lt; - - - &gt; 1.1[Tree Falling]?
+</p>
+</section></section>
+<section><section id="week-1-review-use-cases" class="titleslide slide level1"><h1>Week 1 Review: Use Cases</h1></section><section id="what-canshould-be-recorded" class="slide level2">
+<h2>What can/should be recorded?</h2>
+<p class="fragment">
+Get in the head of the actor!
+</p>
+</section><section id="gis-use-cases" class="slide level2">
+<h2>GIS Use Cases</h2>
+<p class="fragment">
+What are they? (e.g. in business, government, academics, etc.)
+</p>
+</section></section>
+<section><section id="lab-questions" class="titleslide slide level1"><h1>Lab Questions?</h1></section><section id="section-19" class="slide level2">
+<h2></h2>
+<p class="fragment">
+… besides problem 12 …
+</p>
+</section><section id="section-20" class="slide level2">
+<h2></h2>
+<ol type="1">
+<li>Why won’t the SELECT clause work without the FROM clause?</li>
+</ol>
+</section><section id="section-21" class="slide level2">
+<h2></h2>
+<ol start="2" type="1">
+<li>When you use the ORDER BY clause and choose the option descending, what does that do to the data returned?</li>
+</ol>
+</section><section id="section-22" class="slide level2">
+<h2></h2>
+<ol start="3" type="1">
+<li>What would be the ordering of the following statement:</li>
+</ol>
+<pre>
+SELECT prod_desc,prod_id,prod_price
+FROM products
+ORDER BY 3,1;
+</pre>
+</section><section id="section-23" class="slide level2">
+<h2></h2>
+<ol start="4" type="1">
+<li>What is another way to write the ORDER clause in the previous query?</li>
+</ol>
+</section><section id="section-24" class="slide level2">
+<h2></h2>
+<ol start="5" type="1">
+<li>Can I have more than one AND in the WHERE clause?</li>
+</ol>
+</section><section id="section-25" class="slide level2">
+<h2></h2>
+<ol start="6" type="1">
+<li>True or false: Both conditions when using the OR operator must be TRUE.</li>
+</ol>
+</section><section id="section-26" class="slide level2">
+<h2></h2>
+<ol start="7" type="1">
+<li>True or false: All speciﬁed values must match when using the IN operator.</li>
+</ol>
+</section><section id="section-27" class="slide level2">
+<h2></h2>
+<ol start="8" type="1">
+<li>True or false: The AND operator can be used in the SELECT and the WHERE clauses.</li>
+</ol>
+</section><section id="section-28" class="slide level2">
+<h2></h2>
+<ol start="9" type="1">
+<li>What is the logical negation of the IN operator?</li>
+</ol>
+</section><section id="section-29" class="slide level2">
+<h2></h2>
+<ol start="10" type="1">
+<li>Write a SELECT statement that returns the name and cost of each product from the products. Which product is the most expensive?</li>
+</ol>
+</section><section id="section-30" class="slide level2">
+<h2></h2>
+<ol start="11" type="1">
+<li>Write a query that generates a list of all customers and their email addresses.</li>
+</ol>
+</section><section id="section-31" class="slide level2">
+<h2></h2>
+<ol start="12" type="1">
+<li>Using the customer table, write a SELECT statement that returns customer IDs and customer names (in alphabetical order) for customers who live in Indiana, Ohio, Michigan, or Illinois and whose names begin with the letters A or B. (Note: the query will not return any rows, the point is to write the query).</li>
+</ol>
+</section><section id="section-32" class="slide level2">
+<h2></h2>
+<ol start="13" type="1">
+<li>Using the products table, write a SELECT statement that returns the product ID, product description, and product cost. Limit the product cost to between $4.00 and $10.00.</li>
+</ol>
+<pre>
+SELECT prod_id, prod_desc, prod_price
+FROM products
+WHERE prod_price BETWEEN 4.00 AND 10.00; 
+</pre>
+</section><section id="section-33" class="slide level2">
+<h2></h2>
+<ol start="14" type="1">
+<li>Assuming that you used the BETWEEN operator in the previous question, rewrite your SQL statement to achieve the same results using diﬀerent operators. If you did not use the BETWEEN operator, do so now.</li>
+</ol>
+<pre>
+SELECT prod_id, prod_desc, prod_price
+FROM products
+WHERE prod_price > 4.00
+AND prod_price < 10.00;
+</pre>
+</section><section id="section-34" class="slide level2">
+<h2></h2>
+<ol start="15" type="1">
+<li>Pick three items from the products table. Now write a query to return the rows of data from the table associated with those three items. Now rewrite the query to return everything but those three items. For your query use combinations of equality operators and conjunctive operators.</li>
+</ol>
+</section></section>
 <section><section id="data-integrity" class="titleslide slide level1"><h1>Data Integrity</h1></section><section id="acid" class="slide level2">
 <h2>ACID</h2>
 </section><section id="atomicity" class="slide level2">
@@ -693,7 +863,10 @@ gis=# \l
 <p>Either all of a trasaction is executed or none of it is - a transaction can never be partially completed.</p>
 </section><section id="atomicity-1" class="slide level2">
 <h2><font style='color:orange;text-align:left;'>A</font>tomicity</h2>
-<div style="font-size:22pt">
+<div style="font-size:20pt">
+<p class="fragment" align="left">
+<font style='color:lightblue;font-family:courier;'><b>00</b> BEGIN;</font><font style='color:grey;font-family:courier;'> - -Starts a transaction</font>
+</p>
 <p class="fragment" align="left">
 HR’s Balance is $2,000
 </p>
@@ -701,13 +874,13 @@ HR’s Balance is $2,000
 IT’s Balance is $5,000
 </p>
 <p class="fragment" align="left">
-<font style='color:lightblue;font-family:courier;'><b>00</b> UPDATE accounts SET balance=balance-1000 WHERE account_code=‘HR’;</font>
+<font style='color:lightblue;font-family:courier;'><b>01</b> UPDATE accounts SET balance=balance-1000 WHERE account_code=‘HR’;</font>
 </p>
 <p class="fragment" align="left">
 <font style='color:red;'><b>- - - POWER OUTAGE - - -</b></font>
 </p>
 <p class="fragment" align="left">
-<font style='color:lightblue;font-family:courier;'><b>01</b> SELECT balance FROM accounts WHERE account_code=‘HR’;</font>
+<font style='color:lightblue;font-family:courier;'><b>02</b> SELECT balance FROM accounts WHERE account_code=‘HR’;</font>
 </p>
 <p class="fragment" align="left">
 HR’s Balance is $ ? <font style="color:green" class="fragment">$2,000!</font>
@@ -719,17 +892,89 @@ IT’s Balance is $ ? <font style="color:green" class="fragment">$5,000!</font>
 </section><section id="consistency" class="slide level2">
 <h2><font style='color:orange;text-align:left;'>C</font>onsistency</h2>
 <p>Data in a database remain, before and after the transaction, in a “consistent state” as specified by the database schema and other constraints and integrity rules imposed on the database.</p>
+</section><section id="section-35" class="slide level2">
+<h2></h2>
+<p>Limits:</p>
+<ul>
+<li>Pizza toppings</li>
+<li><b>Plant uses</b></li>
+<li>Age (&lt;= 125)</li>
+</ul>
+</section><section id="section-36" class="slide level2">
+<h2></h2>
+<p>Constraint:</p>
+<ul>
+<li>Can’t add farm without field</li>
+<li>Can’t add a duplicate entry</li>
+</ul>
 </section><section id="isolation" class="slide level2">
 <h2><font style='color:orange;text-align:left;'>I</font>solation</h2>
 <p>Requires the results of simultaneous transactions to be independent of each other.</p>
-<aside class="notes">
-Draw something on the board here!
-</aside>
 </section><section id="durability" class="slide level2">
 <h2><font style='color:orange;text-align:left;'>D</font>urability</h2>
 <p>After the completion of a transaction, its results can and always will be traced even if the system fails or crashes.</p>
-</section><section id="section-17" class="slide level2">
+<p class="fragment">
+The transaction is complete until the results are stored!
+</p>
+</section></section>
+<section><section id="keys" class="titleslide slide level1"><h1>Keys</h1></section><section id="section-37" class="slide level2">
 <h2></h2>
+<pre><span class="inner-pre" style="font-size:11px">
+SELECT * FROM employees;
+  emp_id   | last_name | first_name | middle_name |        address        |     city     | state |  zip  |   phone    |   pager    
+-----------+-----------+------------+-------------+-----------------------+--------------+-------+-------+------------+------------
+ 311549902 | STEPHENS  | TINA       | DAWN        | RR 3 BOX 17A          | GREENWOOD    | IN    | 47890 | 3178784465 | 
+ 442346889 | PLEW      | LINDA      | CAROL       | 3301 BEACON           | INDIANAPOLIS | IN    | 46224 | 3172978990 | 
+ 213764555 | GLASS     | BRANDON    | SCOTT       | 1710 MAIN ST          | WHITELAND    | IN    | 47885 | 3178984321 | 3175709980
+ 313782439 | GLASS     | JACOB      |             | 3789 WHITE RIVER BLVD | INDIANAPOLIS | IN    | 45734 | 3175457676 | 8887345678
+ 220984332 | WALLACE   | MARIAH     |             | 7889 KEYSTONE AVE     | INDIANAPOLIS | IN    | 46741 | 3173325986 | 
+ 443679012 | SPURGEON  | TIFFANY    |             | 5 GEORGE COURT        | INDIANAPOLIS | IN    | 46234 | 3175679007 | 
+
+SELECT * FROM employee_pay;
+  emp_id   |   position    | date_hire  | pay_rate | date_last_raise |  salary  |  bonus  
+-----------+---------------+------------+----------+-----------------+----------+---------
+ 311549902 | MARKETING     | 1989-05-23 |          | 1999-05-01      | 40000.00 |        
+ 442346889 | TEAM LEADER   | 1990-06-17 |    14.75 | 1999-06-01      |          |        
+ 213764555 | SALES MANAGER | 1994-08-14 |          | 1999-08-01      | 30000.00 | 2000.00
+ 313782439 | SALESMAN      | 1997-06-28 |          |                 | 20000.00 | 1000.00
+ 220984332 | SHIPPER       | 1996-07-22 |    11.00 | 1999-07-01      |          |        
+ 443679012 | SHIPPER       | 1991-01-14 |    15.00 | 1999-01-01      |          |        
+</span></pre>
+</section><section id="primary" class="slide level2">
+<h2>Primary</h2>
+<pre><span class="inner-pre" style="font-size:11px">
+SELECT * FROM employee_pay;
+  emp_id   |   position    | date_hire  | pay_rate | date_last_raise |  salary  |  bonus  
+-----------+---------------+------------+----------+-----------------+----------+---------
+<font style='color:orange'> 311549902</font> | MARKETING     | 1989-05-23 |          | 1999-05-01      | 40000.00 |        
+<font style='color:orange'> 442346889</font> | TEAM LEADER   | 1990-06-17 |    14.75 | 1999-06-01      |          |        
+<font style='color:orange'> 213764555</font> | SALES MANAGER | 1994-08-14 |          | 1999-08-01      | 30000.00 | 2000.00
+<font style='color:orange'> 313782439</font> | SALESMAN      | 1997-06-28 |          |                 | 20000.00 | 1000.00
+<font style='color:orange'> 220984332</font> | SHIPPER       | 1996-07-22 |    11.00 | 1999-07-01      |          |        
+<font style='color:orange'> 443679012</font> | SHIPPER       | 1991-01-14 |    15.00 | 1999-01-01      |          |        
+</span></pre>
+</section><section id="foreign" class="slide level2">
+<h2>Foreign?</h2>
+<pre><span class="inner-pre" style="font-size:11px">
+SELECT * FROM employee_pay;
+  emp_id   |   position    | date_hire  | pay_rate | date_last_raise |  salary  |  bonus  
+-----------+---------------+------------+----------+-----------------+----------+---------
+<font style='color:orange'> 311549902</font> | MARKETING     | 1989-05-23 |          | 1999-05-01      | 40000.00 |        
+<font style='color:orange'> 442346889</font> | TEAM LEADER   | 1990-06-17 |    14.75 | 1999-06-01      |          |        
+<font style='color:orange'> 213764555</font> | SALES MANAGER | 1994-08-14 |          | 1999-08-01      | 30000.00 | 2000.00
+<font style='color:orange'> 313782439</font> | SALESMAN      | 1997-06-28 |          |                 | 20000.00 | 1000.00
+<font style='color:orange'> 220984332</font> | SHIPPER       | 1996-07-22 |    11.00 | 1999-07-01      |          |        
+<font style='color:orange'> 443679012</font> | SHIPPER       | 1991-01-14 |    15.00 | 1999-01-01      |          |        
+</span></pre>
+<p>They’re the same!</p>
+</section><section id="insect-observations" class="slide level2">
+<h2>Insect Observations</h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/2_insect_db2.png'></p>
+</div>
+</section></section>
+<section><section id="next-week" class="titleslide slide level1"><h1>Next Week…</h1></section><section id="joins" class="slide level2">
+<h2>JOINS!</h2>
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
   $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});

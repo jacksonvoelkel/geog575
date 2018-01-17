@@ -269,6 +269,144 @@ gis=# \l
  gis       | postgres | <font style='color:orange'>UTF8</font>     | en_US.UTF-8 | en_US.UTF-8 | 
 </pre>
 
+# Week 1 Review: What can go wrong?
+
+## What's wrong?
+
+<img src='http://jacksonvoelkel.com/geog575/slide_images/2_plant_db.png'>
+
+<p class="fragment">Find all "Hedging": IF use1 = 'hedging' OR use2 = 'hedging' ...</p>
+<p class="fragment">How many uses can we have?</p>
+
+## How can we fix this?
+
+<div class="stretch fragment">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/2_plant_db2.png'>
+</div>
+
+## How can we determine what is a "use"?
+
+<p class="fragment">Chinchilla hallucinogenic</p>
+<p class="fragment">Swinging like Tarzan</p>
+
+## How can we restrict these uses?
+
+User input, field restrictions, etc (Churcher Ch. 11)
+
+## What's wrong?
+
+<img src='http://jacksonvoelkel.com/geog575/slide_images/2_insect_db.png'>
+
+<p class="fragment">Farm/Field repeated enough that errors are likely.</p>
+<p class="fragment">Date is repeated for every entry.</p>
+
+## How can we fix this?
+
+<div class="stretch fragment">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/2_insect_db2.png'>
+</div>
+
+##
+
+Why did that work? What are we actually measuring here (farms, insects, etc)?
+
+# Week 1 Review: Data Modeling
+
+<p class="fragment">Where should we start: with the end use or the nature of the data?</p>
+<p class="fragment">Nature of the data! Proper handelling allows for more uses in the future.</p>
+
+## Relationships
+
+What is the cardinality?
+
+<img src='http://jacksonvoelkel.com/geog575/slide_images/2_plant_db2.png'>
+
+##
+
+<p>What could be a real 1.1 < - - - > 1.1 cardinality?</p>
+<p class="fragment">[US Citizens]1.1 < - - - > 1.1[SSN]</p>
+<p class="fragment">What could be a 0.n < - - - > 1.1?</p>
+<p class="fragment">[Observation]0.1 < - - - > 1.1[Tree Falling]?</p>
+
+# Week 1 Review: Use Cases
+
+## What can/should be recorded?
+
+<p class="fragment">Get in the head of the actor!</p>
+
+## GIS Use Cases
+
+<p class="fragment">What are they? (e.g. in business, government, academics, etc.)</p>
+
+# Lab Questions?
+
+##
+<p class="fragment">... besides problem 12 ...</p>
+
+##
+1) Why won’t the SELECT clause work without the FROM clause? 
+
+##
+2) When you use the ORDER BY clause and choose the option descending, what does that do to the data returned?
+
+##
+3) What would be the ordering of the following statement:
+
+<pre>
+SELECT prod_desc,prod_id,prod_price
+FROM products
+ORDER BY 3,1;
+</pre>
+
+##
+4) What is another way to write the ORDER clause in the previous query?
+
+##
+5) Can I have more than one AND in the WHERE clause?
+
+##
+6) True or false: Both conditions when using the OR operator must be TRUE.
+
+##
+7) True or false: All speciﬁed values must match when using the IN operator. 
+
+##
+8) True or false: The AND operator can be used in the SELECT and the WHERE clauses.
+
+##
+9) What is the logical negation of the IN operator? 
+
+##
+10) Write a SELECT statement that returns the name and cost of each product from the products. Which product is the most expensive? 
+
+##
+11) Write a query that generates a list of all customers and their email addresses.
+
+##
+12) Using the customer table, write a SELECT statement that returns customer IDs and customer names (in alphabetical order) for customers who live in Indiana, Ohio, Michigan, or Illinois and whose names begin with the letters A or B.  (Note: the query will not return any rows, the point is to write the query).
+
+##
+13) Using the products table, write a SELECT statement that returns the product ID, product description, and product cost. Limit the product cost to between $4.00 and $10.00. 
+
+<pre>
+SELECT prod_id, prod_desc, prod_price
+FROM products
+WHERE prod_price BETWEEN 4.00 AND 10.00; 
+</pre>
+
+##
+14) Assuming that you used the BETWEEN operator in the previous question, rewrite your SQL statement to achieve the same results using diﬀerent operators. If you did not use the BETWEEN operator, do so now. 
+
+<pre>
+SELECT prod_id, prod_desc, prod_price
+FROM products
+WHERE prod_price > 4.00
+AND prod_price < 10.00;
+</pre>
+
+##
+15) Pick three items from the products table. Now write a query to return the rows of data from the table associated with those three items. Now rewrite the query to return everything but those three items. For your query use combinations of equality operators and conjunctive operators. 
+
 # Data Integrity
 
 ## ACID
@@ -279,12 +417,13 @@ Either all of a trasaction is executed or none of it is - a transaction can neve
 
 ## <font style='color:orange;text-align:left;'>A</font>tomicity
 
-<div style="font-size:22pt">
+<div style="font-size:20pt">
+<p class="fragment" align="left"><font style='color:lightblue;font-family:courier;'><b>00</b> BEGIN;</font><font style='color:grey;font-family:courier;'> - -Starts a transaction</font></p>
 <p class="fragment" align="left">HR's Balance is $2,000</p>
 <p class="fragment" align="left">IT's Balance is $5,000</p>
-<p class="fragment" align="left"><font style='color:lightblue;font-family:courier;'><b>00</b> UPDATE accounts SET balance=balance-1000 WHERE account_code='HR';</font></p>
+<p class="fragment" align="left"><font style='color:lightblue;font-family:courier;'><b>01</b> UPDATE accounts SET balance=balance-1000 WHERE account_code='HR';</font></p>
 <p class="fragment" align="left"><font style='color:red;'><b>- - - POWER OUTAGE - - -</b></font></p>
-<p class="fragment" align="left"><font style='color:lightblue;font-family:courier;'><b>01</b> SELECT balance FROM accounts WHERE account_code='HR';</font></p>
+<p class="fragment" align="left"><font style='color:lightblue;font-family:courier;'><b>02</b> SELECT balance FROM accounts WHERE account_code='HR';</font></p>
 <p class="fragment" align="left">HR's Balance is $ ? <font style="color:green" class="fragment">$2,000!</font></p>
 <p class="fragment" align="left">IT's Balance is $ ? <font style="color:green" class="fragment">$5,000!</font></p>
 </div>
@@ -293,19 +432,96 @@ Either all of a trasaction is executed or none of it is - a transaction can neve
 
 Data in a database remain, before and after the transaction, in a "consistent state" as specified by the database schema and other constraints and integrity rules imposed on the database.
 
+##
+
+Limits:
+
+- Pizza toppings
+- <b>Plant uses</b>
+- Age (<= 125)
+
+##
+
+Constraint:
+
+- Can't add farm without field
+- Can't add a duplicate entry
+
 ##<font style='color:orange;text-align:left;'>I</font>solation
 
 Requires the results of simultaneous transactions to be independent of each other.
-
-<aside class="notes">Draw something on the board here!</aside>
 
 ##<font style='color:orange;text-align:left;'>D</font>urability
 
 After the completion of a transaction, its results can and always will be traced even if the system fails or crashes.
 
-# Releational Theory
+<p class="fragment">The transaction is complete until the results are stored!</p>
+
+# Keys
 
 ##
+
+<pre><span class="inner-pre" style="font-size:11px">
+SELECT * FROM employees;
+  emp_id   | last_name | first_name | middle_name |        address        |     city     | state |  zip  |   phone    |   pager    
+-----------+-----------+------------+-------------+-----------------------+--------------+-------+-------+------------+------------
+ 311549902 | STEPHENS  | TINA       | DAWN        | RR 3 BOX 17A          | GREENWOOD    | IN    | 47890 | 3178784465 | 
+ 442346889 | PLEW      | LINDA      | CAROL       | 3301 BEACON           | INDIANAPOLIS | IN    | 46224 | 3172978990 | 
+ 213764555 | GLASS     | BRANDON    | SCOTT       | 1710 MAIN ST          | WHITELAND    | IN    | 47885 | 3178984321 | 3175709980
+ 313782439 | GLASS     | JACOB      |             | 3789 WHITE RIVER BLVD | INDIANAPOLIS | IN    | 45734 | 3175457676 | 8887345678
+ 220984332 | WALLACE   | MARIAH     |             | 7889 KEYSTONE AVE     | INDIANAPOLIS | IN    | 46741 | 3173325986 | 
+ 443679012 | SPURGEON  | TIFFANY    |             | 5 GEORGE COURT        | INDIANAPOLIS | IN    | 46234 | 3175679007 | 
+
+SELECT * FROM employee_pay;
+  emp_id   |   position    | date_hire  | pay_rate | date_last_raise |  salary  |  bonus  
+-----------+---------------+------------+----------+-----------------+----------+---------
+ 311549902 | MARKETING     | 1989-05-23 |          | 1999-05-01      | 40000.00 |        
+ 442346889 | TEAM LEADER   | 1990-06-17 |    14.75 | 1999-06-01      |          |        
+ 213764555 | SALES MANAGER | 1994-08-14 |          | 1999-08-01      | 30000.00 | 2000.00
+ 313782439 | SALESMAN      | 1997-06-28 |          |                 | 20000.00 | 1000.00
+ 220984332 | SHIPPER       | 1996-07-22 |    11.00 | 1999-07-01      |          |        
+ 443679012 | SHIPPER       | 1991-01-14 |    15.00 | 1999-01-01      |          |        
+</span></pre>
+
+## Primary
+
+<pre><span class="inner-pre" style="font-size:11px">
+SELECT * FROM employee_pay;
+  emp_id   |   position    | date_hire  | pay_rate | date_last_raise |  salary  |  bonus  
+-----------+---------------+------------+----------+-----------------+----------+---------
+<font style='color:orange'> 311549902</font> | MARKETING     | 1989-05-23 |          | 1999-05-01      | 40000.00 |        
+<font style='color:orange'> 442346889</font> | TEAM LEADER   | 1990-06-17 |    14.75 | 1999-06-01      |          |        
+<font style='color:orange'> 213764555</font> | SALES MANAGER | 1994-08-14 |          | 1999-08-01      | 30000.00 | 2000.00
+<font style='color:orange'> 313782439</font> | SALESMAN      | 1997-06-28 |          |                 | 20000.00 | 1000.00
+<font style='color:orange'> 220984332</font> | SHIPPER       | 1996-07-22 |    11.00 | 1999-07-01      |          |        
+<font style='color:orange'> 443679012</font> | SHIPPER       | 1991-01-14 |    15.00 | 1999-01-01      |          |        
+</span></pre>
+
+## Foreign?
+
+<pre><span class="inner-pre" style="font-size:11px">
+SELECT * FROM employee_pay;
+  emp_id   |   position    | date_hire  | pay_rate | date_last_raise |  salary  |  bonus  
+-----------+---------------+------------+----------+-----------------+----------+---------
+<font style='color:orange'> 311549902</font> | MARKETING     | 1989-05-23 |          | 1999-05-01      | 40000.00 |        
+<font style='color:orange'> 442346889</font> | TEAM LEADER   | 1990-06-17 |    14.75 | 1999-06-01      |          |        
+<font style='color:orange'> 213764555</font> | SALES MANAGER | 1994-08-14 |          | 1999-08-01      | 30000.00 | 2000.00
+<font style='color:orange'> 313782439</font> | SALESMAN      | 1997-06-28 |          |                 | 20000.00 | 1000.00
+<font style='color:orange'> 220984332</font> | SHIPPER       | 1996-07-22 |    11.00 | 1999-07-01      |          |        
+<font style='color:orange'> 443679012</font> | SHIPPER       | 1991-01-14 |    15.00 | 1999-01-01      |          |        
+</span></pre>
+
+They're the same!
+
+## Insect Observations
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/2_insect_db2.png'>
+</div>
+
+# Next Week...
+
+## JOINS!
 
 
 <script>
