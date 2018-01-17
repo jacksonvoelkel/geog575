@@ -455,7 +455,7 @@ Requires the results of simultaneous transactions to be independent of each othe
 
 After the completion of a transaction, its results can and always will be traced even if the system fails or crashes.
 
-<p class="fragment">The transaction is complete until the results are stored!</p>
+<p class="fragment">The transaction is incomplete until the results are stored!</p>
 
 # Keys
 
