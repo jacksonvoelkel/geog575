@@ -3,12 +3,13 @@ Things to note in lecture from Churcher:
 - What can go wrong?
 	Plant db
 		* what could go wrong??
-			ex: “IF use1 = ‘hedging’ OR use2 = ‘hedging’ OR use3=‘hedging’.”
+			ex: ï¿½IF use1 = ï¿½hedgingï¿½ OR use2 = ï¿½hedgingï¿½ OR use3=ï¿½hedgingï¿½.ï¿½
 			It makes it hard to ask simple questions!
 		* How to fix?
 			note: 'uses' class doesn't restrict the amount of uses for a plant! first table does
 		* How do we determine what is a use?
-			ex: pre determined list (chincilla hallucinogenic might be too specific)
+			ex: pre determined list (chinchilla hallucinogenic might be too specific)
+			"Sand anti-depressant
 
 	Insect db
 		* What's up with this? What is the issue
@@ -20,7 +21,7 @@ Things to note in lecture from Churcher:
 
 - Data Modeling
 	Where should we start? By looking at the form of data or the end use?
-		The data! Ensuring that we properly store data allows for many uses in the future.
+		The data! Ensuring that we properly store data allows for many uses in the future. handelling
 	Relationships
 		* Plants and uses... what could our cardinality be?
 		* Can anybody think up a 1.n----1.n
@@ -36,7 +37,7 @@ Things to note in lecture from Churcher:
 		In GIS, however, we often see far more simplified uses
 			Actor:Analyst {1:enter data; 2: manipulate data; 3: create new data; 4: analyze data; 5: map data}
 			Actor:Tech {1:enter data; 2: manipulate data; 3: create new data; 4: analyze data; 5: map data}
-	
+
 
 - User Interface
 	Sorry, there were many words/terms you don't know!
@@ -51,5 +52,28 @@ Things to note in lecture from Churcher:
 	Question 12
 		* How did you solve it?
 
+		SELECT cust_id, cust_contact
+		FROM customers
+		WHERE cust_state IN ('IN', 'OH', 'MI', 'IL')
+		AND cust_contact LIKE 'A%'
+		OR cust_contact LIKE 'B%'
+		ORDER BY cust_contact;
 
-		
+		--OR
+
+		SELECT cust_id, cust_contact
+		FROM customers
+		WHERE cust_state IN ('IN', 'OH', 'MI', 'IL')
+		AND cust_contact SIMILAR TO '(A|B)%'
+		ORDER BY cust_contact;
+
+		--OR
+
+		SELECT cust_id, cust_contact
+		FROM customers
+		WHERE cust_state IN ('IN', 'OH', 'MI', 'IL')
+		AND cust_contact BETWEEN 'A' and 'C'
+		ORDER BY cust_contact;
+
+
+		.... any other way?

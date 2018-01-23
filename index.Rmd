@@ -523,6 +523,12 @@ They're the same!
 
 ## JOINS!
 
+# Added two presentations:
+
+Micah and Will - unprecidented look into major sources of info and resources
+
+# Week 2 Review: something...
+
 # Joins
 
 ## Why?
@@ -574,6 +580,8 @@ WHERE TableB.name IS null
 <div class="stretch">
   <img src='http://jacksonvoelkel.com/geog575/slide_images/join_anti.jpg'>
 </div>
+
+# Next Week:
 
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
