@@ -975,6 +975,50 @@ SELECT * FROM employee_pay;
 </section></section>
 <section><section id="next-week" class="titleslide slide level1"><h1>Next Week…</h1></section><section id="joins" class="slide level2">
 <h2>JOINS!</h2>
+</section></section>
+<section><section id="joins-1" class="titleslide slide level1"><h1>Joins</h1></section><section id="why" class="slide level2">
+<h2>Why?</h2>
+<ul>
+<li>The true power of an RDMS</li>
+<li>We’ve been ripping tables apart (normalization) <em>because</em> we have joins!</li>
+</ul>
+</section><section id="inner-join" class="slide level2">
+<h2>Inner Join</h2>
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+INNER JOIN TableB
+ON TableA.name = TableB.name
+</span></pre>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_inner.jpg'></p>
+</div>
+</section><section id="full-outer-join" class="slide level2">
+<h2>Full Outer Join</h2>
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+FULL OUTER JOIN TableB
+ON TableA.name = TableB.name
+</span></pre>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_full_outer.jpg'></p>
+</div>
+</section><section id="left-outer-join" class="slide level2">
+<h2>Left Outer Join</h2>
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.name = TableB.name
+</span></pre>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_left_outer.jpg'></p>
+</div>
+</section><section id="anti-join" class="slide level2">
+<h2>Anti-Join</h2>
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.name = TableB.name
+WHERE TableB.name IS null
+</span></pre>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_anti.jpg'></p>
+</div>
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
   $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});

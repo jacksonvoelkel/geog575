@@ -532,30 +532,48 @@ They're the same!
 
 ## Inner Join
 
-<pre><span class="inner-pre" style="font-size:12px">
-SELECT * FROM TableA
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
 INNER JOIN TableB
 ON TableA.name = TableB.name
 </span></pre>
 
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/join_inner.jpg'>
+</div>
+
 ## Full Outer Join
 
-<pre><span class="inner-pre" style="font-size:12px">
-
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+FULL OUTER JOIN TableB
+ON TableA.name = TableB.name
 </span></pre>
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/join_full_outer.jpg'>
+</div>
 
 ## Left Outer Join
 
-<pre><span class="inner-pre" style="font-size:12px">
-
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.name = TableB.name
 </span></pre>
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/join_left_outer.jpg'>
+</div>
 
 ## Anti-Join
 
-<pre><span class="inner-pre" style="font-size:12px">
-
+<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.name = TableB.name
+WHERE TableB.name IS null
 </span></pre>
 
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/join_anti.jpg'>
+</div>
 
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
