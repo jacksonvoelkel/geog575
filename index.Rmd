@@ -523,6 +523,39 @@ They're the same!
 
 ## JOINS!
 
+# Joins
+
+## Why?
+
+- The true power of an RDMS
+- We've been ripping tables apart (normalization) _because_ we have joins!
+
+## Inner Join
+
+<pre><span class="inner-pre" style="font-size:12px">
+SELECT * FROM TableA
+INNER JOIN TableB
+ON TableA.name = TableB.name
+</span></pre>
+
+## Full Outer Join
+
+<pre><span class="inner-pre" style="font-size:12px">
+
+</span></pre>
+
+## Left Outer Join
+
+<pre><span class="inner-pre" style="font-size:12px">
+
+</span></pre>
+
+## Anti-Join
+
+<pre><span class="inner-pre" style="font-size:12px">
+
+</span></pre>
+
 
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});

@@ -1,0 +1,113 @@
+---
+title: "Accessing Postgres"
+author: "<br>Jackson Voelkel <br> <font style='font-size:16pt'>(jvoelkel [at] pdx [dot] edu)</font>"
+date: "GEOG 575 <br> Portland State University <br> Winter 2018"
+output:
+  revealjs::revealjs_presentation:
+    theme: "black"
+    transition: slide
+    self_contained: false
+    reveal_plugins: ["zoom"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# The Postgres Server
+
+# Where is it?
+
+##
+
+The server we will be using is located at: <br> learn-pgsql.rc.pdx.edu.
+
+Did you look it up in your browser? Nothing is there! What's the deal?
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+    .reveal section img { background:none; border:none; box-shadow:none; }
+</style>
+
+
+# What is it?
+
+##
+
+Think of that previous link as your access point to the class's Postgres databases (reffered to as the 'host').
+
+learn-pgsql.rc.pdx.edu is a server, but unlike those displaying this presentation it does not contain a website - it's the computer that our Postgres database lives on.
+
+# How do I access it?
+
+##
+
+We can plug this into PgAdmin to begin connecting to our databases. We'll give it an easy-to-identify name too...
+
+##
+
+<img src="http://jacksonvoelkel.com/geog575/name_host.gif"
+<small>Note: your PgAdmin may look different - this is purely cosmetic.</small>
+
+##
+
+I've sent you all your login information, which you put in the same connection window.
+
+<b>Note: </b> be careful saving passwords on lab computers! 
+
+##
+
+<img src="http://jacksonvoelkel.com/geog575/user_password.gif"></img>
+
+##
+
+Once connected, we can find our tables in:
+
+Databases > username > Schemas > public
+
+##
+
+<img src="http://jacksonvoelkel.com/geog575/tables_clean.gif"></img>
+
+##
+
+The passwords are long and complex, which makes them hard to remember. Also, because I sent these to you over the internet, please reset it!
+
+Under our class's server in PgAdmin, navigate to "Login Roles". From this, right click your name, select "Properties", navigate to "Definition", enter your new password twice, and hit ok!
+
+##
+
+<img src="http://jacksonvoelkel.com/geog575/password_change.gif"></img>
+<small><b>WARNING!</b> Do NOT forget this new password!</small>
+
+##
+
+Seriously, do NOT forget your new password.
+
+# What do I do now?
+
+##
+
+To start querying the tables, hit the 'SQL' magnifying glass button in PgAdmin. This will open a new window that allows you to write code and run queries!
+
+# More resources
+
+##
+
+There are two videos on D2L from the course's previous instructor detailing the use of PgAdmin 3 - please watch them!
+
+If you do not have access to D2L (<i>and</i> are registered for the course!) please contact me via Slack.
+
+##
+
+Finall, happy querying!
+
+<img src="http://jacksonvoelkel.com/geog575/tom.gif"></img>
+
+<script>
+  $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
+  $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});
+  $("img").each(function(){$(this).replaceWith($('<img src=' + this.src + '>' + this.innerHTML + '</img>'));});
+  $("li").addClass("fragment");
+</script>
