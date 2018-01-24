@@ -525,9 +525,31 @@ They're the same!
 
 # Added two presentations:
 
-Micah and Will - unprecidented look into major sources of info and resources
+## Micah Babinski, GISP - 2/21
 
-# Week 2 Review: something...
+Bureau of Land Management
+
+## Will Garrick - 2/28
+
+Portland State University Research Computing
+
+# Week 2 Review: Bian
+
+##
+
+- Why did we read this?
+- How does this tie into use cases?
+- What main points is she trying to make?
+
+##
+
+- What types of data (spatial or otherwise) may pose conceptual issues by constraining them to 'objects'?
+
+- [ Spatial residual example in R ]
+
+##
+
+When all you have is a hammer, everything looks like a nail.
 
 # Joins
 
@@ -538,50 +560,125 @@ Micah and Will - unprecidented look into major sources of info and resources
 
 ## Inner Join
 
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+<pre>SELECT * FROM TableA
 INNER JOIN TableB
 ON TableA.name = TableB.name
-</span></pre>
+</pre>
+
+##
 
 <div class="stretch">
   <img src='http://jacksonvoelkel.com/geog575/slide_images/join_inner.jpg'>
 </div>
 
+##
+
+<pre>
+SELECT * FROM employees e 
+INNER JOIN vendors v 
+ON e.state = v.vend_state;
+</pre>
+
+... No matches!
+
 ## Full Outer Join
 
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+<pre>SELECT * FROM TableA
 FULL OUTER JOIN TableB
 ON TableA.name = TableB.name
-</span></pre>
+</pre>
+
+##
 
 <div class="stretch">
   <img src='http://jacksonvoelkel.com/geog575/slide_images/join_full_outer.jpg'>
 </div>
 
-## Left Outer Join
+##
 
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+<pre>
+SELECT * FROM orderitems oi
+FULL OUTER JOIN products p 
+ON oi.prod_id = p.prod_id;
+</pre>
+
+Returns all records when there is a match in either table.
+
+## Left Outer Join (AKA JOIN)
+
+<pre>SELECT * FROM TableA
 LEFT OUTER JOIN TableB
 ON TableA.name = TableB.name
-</span></pre>
+</pre>
+
+##
 
 <div class="stretch">
   <img src='http://jacksonvoelkel.com/geog575/slide_images/join_left_outer.jpg'>
 </div>
 
+##
+
+<pre>
+SELECT * FROM products p
+LEFT OUTER JOIN orderitems oi
+ON oi.prod_id = p.prod_id;
+</pre>
+
+Returns everything that matches the 'left' table.
+
+##
+
+<pre>
+SELECT * FROM orders o
+JOIN customers c
+ON o.cust_id = c.cust_id;
+</pre>
+
+Find customer info for all orders placed
+
+##
+
+<pre>
+SELECT * FROM orders o
+FULL OUTER JOIN customers c
+ON o.cust_id = c.cust_id;
+</pre>
+
+What will this do?
+
 ## Anti-Join
 
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+Postgres using SQL logic, not a specific function!
+
+<pre>SELECT * FROM TableA
 LEFT OUTER JOIN TableB
 ON TableA.name = TableB.name
 WHERE TableB.name IS null
 </span></pre>
 
+##
+
 <div class="stretch">
   <img src='http://jacksonvoelkel.com/geog575/slide_images/join_anti.jpg'>
 </div>
 
+##
+
+<pre>
+SELECT * FROM orders o
+FULL OUTER JOIN customers c
+ON o.cust_id = c.cust_id
+WHERE o.order_num IS NULL;
+</pre>
+
 # Next Week:
+
+## Database Normalization
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/homer.gif'>
+</div>
 
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});

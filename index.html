@@ -977,7 +977,23 @@ SELECT * FROM employee_pay;
 <h2>JOINS!</h2>
 </section></section>
 <section><section id="added-two-presentations" class="titleslide slide level1"><h1>Added two presentations:</h1></section></section>
-<section><section id="week-2-review-something" class="titleslide slide level1"><h1>Week 2 Review: something…</h1></section></section>
+<section><section id="week-2-review-bian" class="titleslide slide level1"><h1>Week 2 Review: Bian</h1></section><section id="section-38" class="slide level2">
+<h2></h2>
+<ul>
+<li>Why did we read this?</li>
+<li>How does this tie into use cases?</li>
+<li>What main points is she trying to make?</li>
+</ul>
+</section><section id="section-39" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>What types of data (spatial or otherwise) may pose conceptual issues by constraining them to ‘objects’?</p></li>
+<li><p>[ Spatial residual example in R ]</p></li>
+</ul>
+</section><section id="section-40" class="slide level2">
+<h2></h2>
+<p>When all you have is a hammer, everything looks like a nail.</p>
+</section></section>
 <section><section id="joins-1" class="titleslide slide level1"><h1>Joins</h1></section><section id="why" class="slide level2">
 <h2>Why?</h2>
 <ul>
@@ -986,43 +1002,111 @@ SELECT * FROM employee_pay;
 </ul>
 </section><section id="inner-join" class="slide level2">
 <h2>Inner Join</h2>
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+<pre>SELECT * FROM TableA
 INNER JOIN TableB
 ON TableA.name = TableB.name
-</span></pre>
+</pre>
+</section><section id="section-41" class="slide level2">
+<h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_inner.jpg'></p>
 </div>
+</section><section id="section-42" class="slide level2">
+<h2></h2>
+<pre>
+SELECT * FROM employees e 
+INNER JOIN vendors v 
+ON e.state = v.vend_state;
+</pre>
+<p>… No matches!</p>
 </section><section id="full-outer-join" class="slide level2">
 <h2>Full Outer Join</h2>
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+<pre>SELECT * FROM TableA
 FULL OUTER JOIN TableB
 ON TableA.name = TableB.name
-</span></pre>
+</pre>
+</section><section id="section-43" class="slide level2">
+<h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_full_outer.jpg'></p>
 </div>
-</section><section id="left-outer-join" class="slide level2">
-<h2>Left Outer Join</h2>
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+</section><section id="section-44" class="slide level2">
+<h2></h2>
+<pre>
+SELECT * FROM orderitems oi
+FULL OUTER JOIN products p 
+ON oi.prod_id = p.prod_id;
+</pre>
+<p>Returns all records when there is a match in either table.</p>
+</section><section id="left-outer-join-aka-join" class="slide level2">
+<h2>Left Outer Join (AKA JOIN)</h2>
+<pre>SELECT * FROM TableA
 LEFT OUTER JOIN TableB
 ON TableA.name = TableB.name
-</span></pre>
+</pre>
+</section><section id="section-45" class="slide level2">
+<h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_left_outer.jpg'></p>
 </div>
+</section><section id="section-46" class="slide level2">
+<h2></h2>
+<pre>
+SELECT * FROM products p
+LEFT OUTER JOIN orderitems oi
+ON oi.prod_id = p.prod_id;
+</pre>
+<p>Returns everything that matches the ‘left’ table.</p>
+</section><section id="section-47" class="slide level2">
+<h2></h2>
+<pre>
+SELECT * FROM orders o
+JOIN customers c
+ON o.cust_id = c.cust_id;
+</pre>
+<p>Find customer info for all orders placed</p>
+</section><section id="section-48" class="slide level2">
+<h2></h2>
+<pre>
+SELECT * FROM orders o
+FULL OUTER JOIN customers c
+ON o.cust_id = c.cust_id;
+</pre>
+<p>What will this do?</p>
 </section><section id="anti-join" class="slide level2">
 <h2>Anti-Join</h2>
-<pre><span class="inner-pre" style="font-size:12px">SELECT * FROM TableA
+<p>Postgres using SQL logic, not a specific function!</p>
+<pre>SELECT * FROM TableA
 LEFT OUTER JOIN TableB
 ON TableA.name = TableB.name
 WHERE TableB.name IS null
 </span></pre>
+</section><section id="section-49" class="slide level2">
+<h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_anti.jpg'></p>
 </div>
+</section><section id="section-50" class="slide level2">
+<h2></h2>
+<pre>
+SELECT * FROM orders o
+FULL OUTER JOIN customers c
+ON o.cust_id = c.cust_id
+WHERE o.order_num IS NULL;
+</pre>
 </section></section>
-<section><section id="next-week-1" class="titleslide slide level1"><h1>Next Week:</h1></section></section>
+<section><section id="next-week-1" class="titleslide slide level1"><h1>Next Week:</h1></section><section id="database-normalization" class="slide level2">
+<h2>Database Normalization</h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/homer.gif'></p>
+</div>
+<script>
+  $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
+  $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});
+  $("img").each(function(){$(this).replaceWith($('<img src=' + this.src + '>' + this.innerHTML + '</img>'));});
+  $("li").addClass("fragment");
+</script>
+</section></section>
     </div>
   </div>
 
