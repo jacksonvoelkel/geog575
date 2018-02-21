@@ -544,12 +544,213 @@ Portland State University Research Computing
 ##
 
 - What types of data (spatial or otherwise) may pose conceptual issues by constraining them to 'objects'?
-
+- Examples of fields?
 - [ Spatial residual example in R ]
 
 ##
 
 When all you have is a hammer, everything looks like a nail.
+
+# Week 2 review: Lab
+
+## 1
+True or false: The AVG function returns an average of all rows from a SELECT column, includingany NULL values.
+
+- Either!!! Null is NOTHING, not 0!
+
+## 2
+
+Must a column appear in the SELECT statement to use a GROUP BY clause on it?
+
+- No!
+
+<pre class="fragment">SELECT AVG(prod_price)
+FRom products
+GROUP BY <span class="inner-pre" style="color:orange;">vend_id</span>;
+</pre>
+
+## 3
+
+True or false: You must also use the GROUP BY clause when using the HAVING clause.
+
+- TRUE... some aggregation must happen!
+
+## 4
+
+What could be a major factor concerning the representation and comparison of date and time values ifyour company is an international organization?
+
+-  Month/Day/Year vs. Day/Month/Year
+
+## 5
+
+Will the following SELECT statements work? If not, what fixes thestatements? If so, why?
+
+<pre >SELECT COUNT(prod_id), prod_price
+FROM products;
+</pre>
+
+- Doesn't work! COUNT() will just return a single number.. either remove count or remove prod_price
+
+<pre>SELECT MIN(BONUS), MAX(SALARY)
+FROM EMPLOYEE_PAY
+WHERE SALARY > 20000;
+</pre>
+
+- Works fine! However, what's odd about it?
+- Capitalization
+
+## 7
+
+What is the average salary?
+
+- 30000.00
+
+<pre class="fragment">SELECT AVG(salary)
+FROM employee_pay;</pre>
+
+## 8
+
+What is the maximum bonus?
+
+- 2000.00
+
+<pre class="fragment">SELECT MAX(bonus)
+FROM employee_pay;</pre>
+
+## 9
+
+What are the total salaries?
+
+- 90000.00
+
+<pre class="fragment">SELECT SUM(salary)
+FROM employee_pay;</pre>
+
+## 10
+
+What is the minimum pay rate?
+
+- 11.00
+
+<pre class="fragment">SELECT MIN(pay_rate)
+FROM employee_pay;</pre>
+
+
+## 11
+
+How many rows are in the table?
+
+- 6
+
+<pre class="fragment">SELECT COUNT(*)
+FROM employee_pay;</pre>
+
+## 12
+
+Enter the following query to show all cities in the employees table:
+
+<pre>SELECT city
+FROM employees;</pre>
+
+Describe how the results compare to this query:
+
+<pre>SELECT city
+	, count(*)
+FROM employees
+GROUP BY city;</pre>
+
+## 12 (2)
+
+No duplicates, instead shows a count of how many times that city occurs.
+
+## 13
+
+Modify the previous query to only return data for cities having more than one employee.
+
+<pre class="fragment">SELECT city
+	, count(*)
+FROM employees
+GROUP BY city
+HAVING count(*) > 1;</pre>
+
+## 14
+
+Modify the previous query to order the results in descending order, from highest count to lowest.
+
+<pre class="fragment">SELECT city
+	, count(*)
+FROM employees
+GROUP BY city
+ORDER BY 2 DESC;</pre>
+
+- Or...
+
+<pre class="fragment">SELECT city
+	, count(*)
+FROM employees
+GROUP BY city
+ORDER BY count(*) DESC;</pre>
+
+## 15
+
+Write a query to list the average pay rate and salary by position from the employee_pay table.
+
+<pre class="fragment">SELECT position
+	,AVG(salary) avg_salary
+	,AVG(pay_rate) avg_payrate
+FROM employee_pay GROUP BY position;</pre>
+
+## 16
+
+Write a query to list the average salary by position from the employee_pay table where the averagesalary is greater than $20,000.
+
+<pre class="fragment">SELECT position
+	,AVG(salary) avg_salary
+FROM employee_pay GROUP BY position
+HAVING AVG(salary) > 20000;</pre>
+
+## 17
+
+Using the employee table, write an SQL statement that lists employee email addresses. Email is not astored column, so give it an alias. The email address for each employee should be as follows:first.last@example.com. For example, John Smith’s email address is john.smith@example.com.
+
+<pre class="fragment">SELECT (<span style="color:orange">LOWER(first_name)</span> || '.'  || LOWER(last_name) || '@example.com') <span style="color:purple">emails</span>
+FROM employees;</pre>
+
+- LOWER()!
+- give it an alias (in the instructions)!
+
+## 18
+
+Refer to the PostgreSQL string function documentation. In particular, we want to pay attention to the substr() or substring() functions – they do the same thing, the syntax is just slightly different., These functions select just a portion of a given string, given a starting position, and the number of characters you want selected.
+Write a SQL statement that selects from the employees table each employee’s name, employee ID, and phone number in the following formats:
+
+The name should be displayed as “Smith, John” (this requires a case conversion function).
+The employee ID should be displayed as 999-99-9999.
+The phone number should be displayed as (999) 999-9999.
+
+## 18 (2)
+
+Did you find "INITCAP"? Google and ctrl+f are _crucial_.
+
+<pre>SELECT INITCAP('thIs funCtiON iS suPER hELPful!');</pre>
+
+<pre>SELECT
+<span style="color:orange">INITCAP(LOWER(last_name))</span> || ', ' || INITCAP(LOWER(first_name)) emp_name
+	, SUBSTR(emp_id,1,3) || '-' || SUBSTR(emp_id,4,2) || '-' || SUBSTR(emp_id,6,4) emp_id
+	, '(' || SUBSTR(phone,1,3) || ') ' || SUBSTR(phone,3,3) || '-' || SUBSTR(phone,6,4) emp_phone
+FROM employees;</pre>
+
+
+## 19
+
+Refer to the at PostgreSQL date documentation. Write a query that shows what day of the week each employee was hired.
+
+- TO_CHAR!
+
+<pre class="fragment">SELECT emp_id
+	<span style="font-color:orange">,</span>INITCAP(<span style="color:orange">TO_CHAR(date_hire,'day')</span>) hire_dat
+FROM employee_pay;</pre>
+
 
 # Joins
 
@@ -679,6 +880,1141 @@ WHERE o.order_num IS NULL;
 <div class="stretch">
   <img src='http://jacksonvoelkel.com/geog575/slide_images/homer.gif'>
 </div>
+
+# Week 3 review: Lab
+
+## 1
+
+When using a base table to join unrelated tables, must you select any columns from the base table?
+
+##
+
+No! They must be called, but don't have to be selected.
+
+<pre>SELECT order_num FROM orders o
+JOIN customers c
+ON o.cust_id = c.cust_id;</pre>
+
+## 2
+
+Can you join a table on more than one column?
+
+##
+
+Yes
+
+<pre>SELECT e.emp_id
+FROM employees e
+JOIN vendors v
+  ON e.first_name = v.vend_name
+  <span style="color:orange">AND</span> e.city = v.vend_city;</pre>
+  
+No error!
+
+## 3
+
+What type of join would you use to return records from one table, regardless of the existence of associated records in the related table?
+
+##
+
+LEFT OUTER will return everything from specified field!
+
+<pre>SELECT c.cust_id
+FROM customers c
+<span style="color:orange">JOIN</span> orders o
+ON c.cust_id<span style="color:red">::integer</span> = o.order_num;</pre>
+
+<pre>SELECT c.cust_id
+FROM customers c
+<span style="color:orange">LEFT OUTER JOIN</span> orders o
+ON c.cust_id::integer = o.order_num;</pre>
+
+In this case, LEFT OUTER JOIN results in the same thing as
+
+<pre>SELECT cust_id FROM customers;</pre>
+
+##
+
+Remember: LEFT OUTER JOIN is the same as LEFT JOIN (you can't have the left side of the 'inner' part)
+
+<pre>SELECT c.cust_id
+FROM customers c
+<span style="color:orange">LEFT JOIN</span> orders o
+ON c.cust_id::integer = o.order_num;</pre>
+
+
+## 4
+What type of join do you use to test equality among rows of related tables?
+
+##
+
+INNER JOIN
+
+- Only returns matches between the tables
+
+## 5
+
+What happens if you select from two different tables but fail to join the tables?
+
+##
+
+A Cartesian Product!
+
+<pre>SELECT * from employees<span style="color:orange">,</span> employee_pay;</pre>
+
+<pre>SELECT * from employees e
+<span style="color:orange">JOIN</span> employee_pay ep
+  ON e.emp_id = ep.emp_id;</pre>
+  
+## 6
+
+What is the function of a subquery when used with a SELECT statement?
+
+##
+
+- Similar to 'IN'
+- Allows for more complex queries
+- Allows for more 'dynamic' processes
+
+## 7
+
+Which of the query combining operators accomplishes each of these:
+
+## 7.1
+
+Shows duplicates
+
+##
+
+UNION ALL
+
+## 7.2
+Return only rows from the first query that match those in the second query
+
+##
+
+INTERSECT
+
+## 7.3
+
+Return no duplicates
+
+##
+
+UNION
+
+## 7.4
+
+Return only rows from the first query not returned by the second
+
+##
+
+EXCEPT
+
+## 8
+
+Using a subquery, write a query that returns the names of all employees who have a pay rate greater than Linda Plew, whose employee identification number is 442346889.
+
+## 
+
+First (more of a mental excercise):
+
+<pre class="fragment">SELECT pay_rate
+FROM employee_pay
+WHERE emp_id = '442346889';</pre>
+
+##
+
+Second:
+
+<pre>SELECT emp_id
+FROM employee_pay
+WHERE pay_rate > (
+	SELECT pay_rate
+	FROM employee_pay
+	WHERE emp_id = '442346889');</pre>
+
+##
+
+Final:
+
+<pre>SELECT first_name
+FROM employees
+WHERE emp_id IN (
+SELECT emp_id
+FROM employee_pay
+WHERE pay_rate > (
+	SELECT pay_rate
+	FROM employee_pay
+	WHERE emp_id = '442346889'));</pre>
+	
+##
+
+... or, nicer:
+
+<pre>SELECT INITCAP(first_name) || ' ' || INITCAP(last_name) AS emp_name
+FROM employees
+WHERE emp_id IN (
+SELECT emp_id
+FROM employee_pay
+WHERE pay_rate > (
+	SELECT pay_rate
+	FROM employee_pay
+	WHERE emp_id = '442346889'));</pre>
+
+##
+
+Other?
+
+## 9
+
+Using a subquery, write a query that lists all products that cost more than the average cost of all products.
+
+##
+
+First:
+
+<pre>SELECT AVG(prod_price)
+FROM Products;</pre>
+
+##
+
+Final:
+
+<pre>SELECT prod_name
+	,prod_price
+FROM Products
+WHERE prod_price > (
+	SELECT AVG(prod_price)
+	FROM Products);</pre>
+
+## 10
+
+Write a compound query to find the customers who have placed an order.
+
+##
+
+<pre>SELECT cust_id
+FROM Customers;</pre>
+
+<pre>SELECT cust_id
+FROM Orders;</pre>
+
+##
+
+<pre>SELECT cust_id
+FROM Customers
+INTERSECT
+SELECT cust_id
+FROM Orders;</pre>
+
+## 11
+
+Write a compound query to find the customers who have not placed an order.
+
+##
+
+<pre>SELECT cust_id
+FROM Customers
+EXCEPT
+SELECT cust_id
+FROM Orders;</pre>
+
+# Normalization
+
+# First Normal Form
+
+<blockquote>A table is not in first normal form if it is keeping multiple values for a piece of information.</blockquote>
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_1st.png'>
+</div>
+
+##
+
+What is wrong with multiple values in a single field?
+
+- All or nothing (no unique values)
+
+## 
+
+Are we done?
+
+<blockquote class="fragment">If a table is not in first normal form, remove the multivalued information from the table. Create a new table with that information and the primary key of the original table</blockquote>
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_1st_2.png'>
+</div>
+
+# Second Normal Form
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_2nd_1.png'>
+</div>
+
+Is it in first normal form? What is the PK?
+
+- empID and project_num
+
+##
+
+Issue:
+
+<p class="fragment">We don't <i>need</i> the primary key to figure out everything!</p>
+
+<p class="fragment">What are hours dependent on?</p>
+
+- empID
+- proj_num
+
+<p class="fragment">What is 'contact' denpendent on? 'project_name'?</p>
+
+- proj_num
+
+##
+
+<blockquote>A table is in second normal form if it is in first normal form AND we need ALL the fields in the key to determine the values of the non–key fields.</blockquote>
+
+##
+
+<blockquote>If a table is not in second normal form, remove those non–key fields that are not dependent on the whole of the primary key. Create another table with these fields and the part of the primary key on which they do depend</blockquote>
+
+##
+
+What tables should we make?
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_2nd_1.png'>
+</div>
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_2nd_2.png'>
+</div>
+
+Do we need all of the fields in the key to determin the values of the non-key fields?
+
+##
+
+Note: we can still have multi-field PKs! But every other field must be dependent upon the <i><b>entire</b></i> PK!
+
+# Third Normal Form
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_1.png'>
+</div>
+
+<div style="text-align:left">
+What is the Pk? <span class="fragment" style="color:orange">empID</span>
+
+Is it in Frist Normal Form? <span class="fragment" style="color:orange">Yes</span>
+
+Is it in Second Normal Form? <span class="fragment" style="color:orange">Yes, empID is the only part of the key!</span>
+</div>
+
+## So what is wrong?
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_1.png'>
+</div>
+
+- dep_name repeats
+
+- What can determine dep_name?
+
+  + if empID = 1001... dep_name = Marketing
+  + if dept_num = 2... dep_name = Marketing
+
+##
+
+<blockquote>A table is in third normal form if it is in second normal form AND no non–key fields are depend on a field(s) that is not the primary key.</blockquote>
+
+##
+
+<blockquote>If a table is not in third normal form, remove the non–key fields that are dependent on a field(s) that is not the primary key. Create another table with this field(s) and the field on which it does depend.</blockquote>
+
+##
+
+What should we do?
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_1.png'>
+</div>
+
+- Split into two tables:
+  + Employee
+  + Department
+  
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_2.png'>
+</div>
+
+# Boyce-Codd Normal Form
+
+##
+
+<blockquote>A table is in Boyce–Codd normal form if every determinant could be a primary key</blockquote>
+
+If any field is a <span style="color:orange">determinant</span>, it must be able to be the PK.
+
+- Determinant = determines the value of some other field
+
+##
+
+<div style="text-align:left">
+<p class="fragment">[1st]  A <span style="color:orange">table</span> is based on</p>
+<p class="fragment">[2nd]  the <span style="color:orange">key</span>,</p>
+<p class="fragment">[3rd]  the <span style="color:orange">whole key</span>,</p>
+<p class="fragment">[ BC]  and <span style="color:orange">nothing but the key</span> (so help me Codd)</p>
+</div>
+
+# From First to Third
+
+## FIRST
+
+Require there be only one value per cell.
+
+<div style="background-color:white" class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_first.png'>
+</div>
+
+##
+
+<div style="background-color:white" class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_first_2.png'>
+</div>
+
+## SECOND
+
+Row must depend on the entire primary key.
+
+<div style="background-color:white" class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_second_1.png'>
+</div>
+
+## 
+
+<div style="background-color:white" class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_second_2.png'>
+</div>
+
+- Room number doesn't depend on last name or first name.
+- Moving to a new 'Class' class makes use lose a natural PK! We'll need a synthetic one on 'Students'.
+
+## 
+
+<small>A student's grade is not <i>wholly</i> dependent on a student, rather it is dependent on <i>both</i> a student and the class they are in.</small>
+
+<div style="background-color:white" class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_third_1.png'>
+</div>
+
+<small>Grades table now has a PK built from two FKs.</small>
+
+##
+
+Do we stil need "status" in it's own table?
+
+<div style="text-align:left">
+Is dependent on 'Last Name' + 'First Name? <span class="fragment" style="color:orange">Well, there <i>could</i> be more than one Bruce Wayne</span>
+
+What should we do? <span class="fragment" style="color:orange">I would leave it in a seperate table.</span>
+</div>
+
+<div style="background-color:white" class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_third_1.png'>
+</div>
+
+# Week 3 Reading Assignment
+
+## Some Notes
+
+<div style="text-align:left">
+- My aim this week was to get you some experience.
+- Hard with fake data
+- Author throws in curveballs
+- It's still quite a good book...
+- ... but we are moving on from it.
+- Want to know the answers, according to Churcher?
+</div>
+
+# Next week:
+
+## Assignment: More Normalizaton
+
+## Lab: Table Creation
+
+## A Brief rundown of Indexes
+
+- Indices?
+- <a href="https://www.postgresql.org/docs/9.6/static/indexes.html" target="_blank">Indexes?</a>
+- Whatever.
+
+
+## Midterm prep!
+
+# Week 4 Lab
+
+## 1
+
+Write the SQL to add the following products to the product table:
+
+| prod_id	 | vend_id  | prod_name         | prod_price |
+|----------+----------+-------------------+------------|
+| CO02     |FNG01     | Fireman Costume   | 24.99      |
+| CO03     |FNG01     | Policeman Costume | 24.99      |
+| MISC01   |JTS01     | Kiddie Grab Bag   | 4.99       |
+
+
+##
+
+<pre>INSERT INTO products (
+        prod_id
+        , vend_id
+        , prod_name
+        , prod_price)
+VALUES  ('CO02','FNG01','Fireman Costume',24.99),
+        ('CO03','FNG01','Policeman Costume',24.99),
+        ('MISC01','JTS01','Kiddie Grab Bag',4.99);</pre>
+
+## 2
+Write SQL to correct the cost of the two costumes added. The cost should be the same as the witch costume. note: you should not do this by simply looking up the cost, then updating the data, your SQL statement should include the querying of the database to get the cost of the costume. This can and should be done in a single statement.
+
+##
+
+<pre>UPDATE products
+SET prod_price = (
+        SELECT prod_price FROM products
+        WHERE prod_name='Witch Costume')
+WHERE prod_name LIKE '%Costume%'
+AND prod_price != (
+        SELECT prod_price FROM products
+        WHERE prod_name = 'Witch Costume');</pre>
+
+## 3
+Now we have decided to cut our product line, starting with the new products. Remove the three products you just added.
+
+##
+
+<pre>DELETE FROM products
+WHERE prod_id IN ('CO02','CO03','MISC01');<p/re>
+
+
+## 4
+Before you executed the statements to remove the products you added, what could you have done to ensure that you only delete the desired rows?
+
+Consider a table created with this command:
+
+<pre>CREATE TABLE students (
+  id_num varchar(9) NOT NULL,
+  last_name varchar(15) NOT NULL,
+  first_name varchar(15) NOT NULL,
+  middle_name varchar(15) NOT NULL,
+  address varchar(30) NOT NULL,
+  city varchar(15) NOT NULL,
+  state varchar(2) NOT NULL,
+  zip varchar(5) NOT NULL,
+  date_enrolled date);</pre>
+
+## 5
+Write a statement that creates a primary key constraint using the id_num column.
+
+##
+
+<pre>ALTER TABLE students
+ADD PRIMARY KEY (id_num);</pre>
+
+## 6
+Write a statement to allow the middle_name column to accept NULL values.
+
+##
+
+<pre>ALTER TABLE students
+ALTER COLUMN middle_name DROP NOT NULL;</pre>
+
+## 7
+Write a statement that would restrict the people added into table to only reside in the state of New York (‘NY’)? 
+
+##
+
+<pre>ALTER TABLE students
+ADD CONSTRAINT checkState CHECK(state = 'NY');</pre>
+
+## 8
+What statement would you use to add an auto-incrementing column called student_id to the preceding table?
+
+##
+
+<pre>ALTER TABLE students
+ADD COLUMN student_id SERIAL;</pre>
+
+## 9
+If you haven’t already, create the table and execute commands 5-8. Now, add yourself to the table as a student, but using the zipcode ‘01230’.  What SQL did you use?
+
+##
+
+<pre>INSERT INTO students(id_num,                                                     
+ last_name,
+ first_name,
+ middle_name,
+ address,
+ city,
+ state,
+ zip,
+ date_enrolled)
+VALUES(969645908,
+ 'Voelkel',
+ 'Jackson',
+ 'Lee',
+ '506 SW Mill St.',
+ 'Yonkers',
+ <span style="color:orange">'NY'</span>,
+ '01230',
+ '2/07/2018');</pre>
+
+## 10
+Now write a SQL statement that converts the zipcode column to an integer (this is tricky, but here’s a hint, you’ll need to include USING cast(zip as integer) in your statement. 
+
+##
+
+<pre>ALTER TABLE students
+ALTER COLUMN zip TYPE INTEGER USING CAST(zip AS INTEGER)</pre>
+
+... or ...
+
+<pre>ALTER TABLE students
+ALTER COLUMN zip TYPE INTEGER USING zip::integer</pre>
+
+## 11
+What does the cast function do?
+
+## 12
+Now read back the row you added to the table. What happened to the zipcode? Why?
+
+## 13
+Write and execute the SQL to create a view students_ny that shows only those students in New York state.
+
+##
+
+<pre>CREATE VIEW students_ny AS
+SELECT * from students
+WHERE state = 'NY';</pre>
+
+## 14
+Write a SQL statement creates a summarized view containing the average pay rate and average salary for each city in the employees table. 
+
+##
+
+<pre>CREATE VIEW avg_pay_city AS
+SELECT AVG(P.pay_rate) avg_rate
+	, AVG(P.salary) avg_salary
+	, E.city
+FROM employee_pay P, employees AS E
+WHERE P.emp_id = E.emp_id
+GROUP BY E.city;</pre>
+
+## 15
+Make sure your view from question 13 exists. Now, write a SQL statement that drops the students table. What happens when you execute this statement? How do you make it work using a single statement?
+
+##
+
+<pre>DROP TABLE students CASCADE;</pre>
+
+# Normalization Assignment
+
+## What's (the most) wrong?
+
+- Multiple values... this isn't really a table!
+
+## 
+
+| Park |   Amenity  |
+|------+------------|
+| 1    | Baseball   |
+| 1    | Soccer     |
+| 1    | Playground |
+| 2    | Soccer     |
+| 3    | Horesshoes |
+| 3    | Soccer     |
+| 3    | Baseball   |
+| 3    | Basketball |
+| ...  | ...        |
+| 13   | Playground |
+| 13   | Baseball   |
+| 13   | Soccer     |
+| 13   | Basketball |
+
+
+##
+
+| park_id |        park_name           |  area  |
+|---------+----------------------------+--------|
+| 1      | Arbor Lodge Park           |  8.69  |
+| 2       | Gammans Park               |  1.66  |
+| 3       | Columbia Park              |  34.52 |
+| 4       | McCoy Park                 |  3.57  |
+| 5       | Columbia Park Pool         |  0.85  |
+| 6       | University CC              |  4.46  |
+| 7       | University Park            |  7.03  |
+| 8       | Portsmouth Park            |  4.03  |
+| 9       | St. Johns Community Center |  1.34  |
+| 10      | Pier Park                  |  83.43 |
+| 11      | St J. Racquet C.           |  1.26  |
+| 12      | St J. Park                 |  4.53  |
+| 13      | McKenna Park               |  4.52  | 
+
+
+## Now what?
+
+##
+
+| nbo_id |     nbo_name    |    assoc_chair   | pop   |
+|--------+-----------------+------------------+-------|
+| 1      | Arbor Lodge     | Jed Baum         | 4881  |
+| 2      | Portsmouth      | John Smith       | 10822 | 
+| 3      | St. Johns       | Peter Gabrian    | 14294 |
+| 4      | University Park | Dr. Smarty Pants | 5802  |
+
+## Can we include nbo_id in the parks table?
+
+- Why?
+
+## What else is wrong?
+
+- Portsmouth Park
+- University Park
+- ... Columbia Park
+
+## What do we need to add?
+
+## Intermediary Table
+
+| park_id | nbo_id |
+|---------+--------|
+|    1    |   1    |
+|    2    |   1    |
+|    3    |   2    |
+|    3    |   4    |
+|    4    |   2    |
+|    5    |   2    |
+|    6    |   2    |
+|    7    |   2    |
+|    8    |   4    |
+|    9    |   3    |
+|    10   |   3    |
+|    11   |   3    |
+|    12   |   3    |
+|    13   |   4    |
+
+
+# Midterm
+
+## What are we looking at?
+
+<a href="https://www.youtube.com/watch?v=13liVWaR5yo" target="_blank">Assateague Wild Horses</a>
+
+## Project Overview
+
+<div style="text-align:left">
+
+<p class="fragment">Two new tables: allpony and banddata</p>
+<p class="fragment">Create a fully normalized data model</p>
+<p class="fragment">No 'manual' manipulation (e.g. Excel)</p>
+
+</div>
+
+
+## Deliverables
+
+<div style="text-align:left">
+
+<p class="fragment">A brief report (~500 words); ER diagram (with cardinality, PK/FK)</p>
+<p class="fragment">SQL code; this <i>must</i> run!</p>
+
+</div>
+
+## Advice
+
+<div style="text-align:left">
+
+<p class="fragment">Do not create data that isn't there (not including synthetic PKs)</p>
+<p class="fragment">Do no worry about future data needs - model the data you have <b>only</b></p>
+<p class="fragment">Use the comma_split() function</p>
+
+<pre class="fragment">SELECT 'apple,orange,kiwi,grapefruit', 'a,b,c,d'</pre>
+
+<pre class="fragment">SELECT
+  comma_split('apple,orange,kiwi,grapefruit')
+  , comma_split('a,b,c,d');</pre>
+
+<p class="fragment">Print out the heads of the tables</p>
+<p class="fragment">Draw, draw, draw - ER diagrams can help</p>
+<p class="fragment">Get your hands dirty - experiment with the data</p>
+
+</div>
+
+## Other info
+
+I will be out of town and busy from Thursday until Sunday morning, but you _might_ get a response from me on slack <span class="fragment">... and you can always contact other classmates!</p>
+
+# Next week
+
+## Midterm
+
+- anger
+- frustration
+- lessons learned
+
+## Indexes
+
+- What are they doing?
+- Why are they important?
+
+## and ...
+
+##
+
+<div class="stretch fragment">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/spatial_data.gif'>
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/scream.gif'>
+</div>
+
+# Congrats, you finished the midterm!
+
+# Midterm #2
+
+More normalization, but this time with messier data!
+
+##
+
+(Just kidding)
+
+# Midterm recap
+
+## What is wrong?
+
+## How do we fix it?
+
+<span class="fragment">First, let's make a `horses` table!</span>
+
+## Creating horses table
+
+<pre>CREATE TABLE horses (
+	horse_id <span style="color:orange">CHAR(10) NOT NULL PRIMARY KEY</span>
+	, birth_date  <span style="color:orange">date NULL</span>
+	, status  <span style="color:orange">CHAR(15)</span>
+	, sex  <span style="color:orange">CHAR(1)</span>
+	, color  <span style="color:orange">CHAR(20)</span>
+	, "name"  <span style="color:orange">CHAR(40)</span>
+	, howmarked  <span style="color:orange">CHAR(70)</span>
+	, date_terminate  <span style="color:orange">DATE</span>
+	, notes  <span style="color:orange">TEXT</span>
+	, sire_genetic  <span style="color:orange">CHAR(10)</span>
+);</pre>
+
+## Inserting data into horses
+
+<pre>INSERT INTO horses (
+	horse_id
+	, birth_date
+	, status
+	, sex
+	, color
+	, "name"
+	, howmarked
+	, date_terminate
+	, notes
+	, sire_genetic)</pre>
+
+...
+
+##
+
+<pre>SELECT DISTINCT 
+	horse_id
+	, birth_date
+	, status
+	, sex
+	, color
+	, "name"
+	, howmarked
+	, date_terminate
+	, notes
+	, sire_genetic
+FROM allpony
+-- Adding a similar table from banddata
+--	onto the above selection:
+UNION</pre>
+
+...
+
+##
+
+<pre>SELECT DISTINCT 
+	id
+	, CAST(NULL AS DATE) AS birth_date
+	, NULL AS status
+	, sex
+	, color
+	, "name"
+	, NULL as howmarked
+	, CAST(NULL AS DATE) AS date_terminate
+	, NULL AS notes
+	, NULL AS sire_genetic
+FROM banddata
+--Using a subquery to find all horses that were
+--	not accounted for in allpony.
+WHERE id in (
+	SELECT DISTINCT id FROM banddata
+	EXCEPT
+	SELECT DISTINCT horse_id from allpony);
+SELECT * FROM horses;</pre>
+
+## Cont. dates
+
+Now, let's make a `cont_dates` table!
+
+## Create the table
+
+<pre>DROP TABLE IF EXISTS cont_dates;
+CREATE TABLE cont_dates (
+	horse_id <span style="color:orange">CHAR(10) REFERENCES horses(horse_id)</span>
+	, cont_date <span style="color:orange">CHAR(7)</span>
+	-- Adding a primary key as the combination of both fields:
+	, PRIMARY KEY(horse_id,cont_date)
+);</pre>
+
+## Inserting data
+
+<pre>INSERT INTO cont_dates
+--Using the comma_split function to fix multi-value issue:
+SELECT DISTINCT horse_id, comma_split(conthow) AS cont_date
+FROM allpony;
+SELECT * FROM cont_dates;</pre>
+
+## Births
+
+We need a table to record foal `births`!
+
+## 'births' creation
+
+<pre>DROP TABLE IF EXISTS births;
+CREATE TABLE births (
+	horse_id <span style="color:orange">CHAR(10) REFERENCES horses(horse_id)</span>
+	, foal_yr <span style="color:orange">CHAR(4)</span>
+	-- Adding a primary key as the combination of both fields:
+	, PRIMARY KEY(horse_id,foal_yr)
+);</pre>
+
+## Inserting data to 'births'
+
+<pre>INSERT INTO births
+SELECT horse_id, <span style="color:green">comma_split</span>(foals_produced) AS foal_yr
+FROM allpony;
+SELECT * FROM births;</pre>
+
+## Observations
+
+We can de-clutter the banddata table even further by selecting out some distinct band `observations`
+
+## 
+
+<pre>DROP TABLE IF EXISTS band_obs CASCADE;
+-- Creating a new table from all fields that revolve 
+-- around band information/observations.
+CREATE TABLE band_obs AS
+SELECT DISTINCT "date"
+	, band
+	, bandsize
+	, "zone"
+	, <span style="color:orange">UPPER("location")</span> as "location"
+	, <span style="color:orange">UPPER(habitat)</span> as "habitat"
+	, utm_east
+	, utm_north
+FROM banddata;
+
+ALTER TABLE band_obs
+ADD COLUMN obs_id SERIAL PRIMARY KEY;
+SELECT * FROM band_obs;</pre>
+
+What's the deal with <span style="color:orange">UPPER()</span>?
+
+## Intermediary Table
+
+Finally, we need a table to join Horses to Observations!
+
+## Creating the table
+
+<pre>CREATE TABLE horse_obsID AS
+SELECT id, obs_id FROM band_obs AS j left JOIN banddata AS b
+	ON <span style="color:green">concat</span>(j.band
+	  , j.date
+	  , j.zone
+	  , UPPER(j.location)
+	  , UPPER(j.habitat)
+	  , j.bandsize) = 
+	<span style="color:green">concat</span>(b.band
+      , b.date
+      , b.zone
+	  , UPPER(b.location)
+	  , UPPER(b.habitat)
+	  , b.bandsize);</pre>
+
+## Adding constraints
+
+<pre>ALTER TABLE horse_obsID
+ADD CONSTRAINT horse_fk FOREIGN KEY (id) REFERENCES horses(horse_id);
+ALTER TABLE horse_obsID
+ADD CONSTRAINT obs_fk FOREIGN KEY (obs_id) REFERENCES band_obs(obs_id);
+ALTER TABLE horse_obsID
+ADD CONSTRAINT horse_obsID_pk PRIMARY KEY(id,obs_id);
+
+SELECT * FROM horse_obsID
+order by obs_id DESC;</pre>
+
+## Does it work?
+
+<pre>SELECT *
+FROM band_obs, horses, horse_obsID
+WHERE horse_obsID.obs_id = band_obs.obs_id
+	AND horses.horse_id = horse_obsID.id
+	AND horses.horse_id = 'M2M'
+ORDER BY band_obs.date;</pre>
+
+## Entity-Relation Diagram
+
+Where do we start?
+
+Any volunteers?
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/midterm_er.jpg'>
+</div>
+
+## Time spent?
+
+## Why did we do this?
+
+- Why would anyone do this?
+- Drive home clean data
+- SQL practice
+
+## Is this forever?
+
+No!
+
+- Start clean!
+
+# Indexes
+
+## Finding Information
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/Index_1.jpg'>
+</div>
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/Index_2.jpg'>
+</div>
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/Index_3.jpg'>
+</div>
+
+##
+
+<div class="stretch">
+  <img src='http://jacksonvoelkel.com/geog575/slide_images/Index_4.jpg'>
+</div>
+
+# Spatial Data
+
+##
+Spatial isn't special <span class="fragment">... at least to a RDMS!</span>
+
+<pre class="fragment">select * from schools;</pre>
+
+## Storing Geometry
+
+Why did that look so weird?
+
+<pre class="fragment">select  school_id 
+        ,name 
+        ,address 
+        ,city   
+        ,level 
+        ,district 
+        ,type  
+        , ST_ASTEXT(ST_Transform(geom,4326)) geom
+from schools;</pre>
+
+## Projections
+
+<pre>SELECT  school_id 
+        ,name 
+        ,address 
+        ,city   
+        ,level 
+        ,district 
+        ,type  
+        , ST_AsEWKT(geom)
+FROM schools
+LIMIT 10;</pre>
+
+<a href="http://spatialreference.org/ref/epsg/2913/" target="_blank">What is this '2913'?</a>
+
+## Supported Geometries
+
+<div class="stretch">
+  <img height="580px" src='http://jacksonvoelkel.com/geog575/slide_images/OGC_geometries.png'>
+</div>
+
+##
+
+<pre>select * from blockgrp2010
+limit 100;</pre>
+
+<pre class="fragment">SELECT  fips
+        , pop10
+        , du10
+        , ST_AsTEXT(ST_Transform(geom, 4326))
+FROM blockgrp2010
+LIMIT 100;</pre>
+
+##
+
+Easy to convert to GeoJSON (web GIS!)
+
+<pre>SELECT  fips
+        , ST_AsGeoJSON(ST_Transform(geom, 4326))
+FROM blockgrp2010
+LIMIT 100;</pre>
+
+##
+
+... and that's it for today!
+
+## Next Week
+
+- Longer lab, start early. But it is fun!
+- No reading _questions_, but you should still read!
 
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});

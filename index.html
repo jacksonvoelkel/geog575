@@ -976,7 +976,13 @@ SELECT * FROM employee_pay;
 <section><section id="next-week" class="titleslide slide level1"><h1>Next Week…</h1></section><section id="joins" class="slide level2">
 <h2>JOINS!</h2>
 </section></section>
-<section><section id="added-two-presentations" class="titleslide slide level1"><h1>Added two presentations:</h1></section></section>
+<section><section id="added-two-presentations" class="titleslide slide level1"><h1>Added two presentations:</h1></section><section id="micah-babinski-gisp---221" class="slide level2">
+<h2>Micah Babinski, GISP - 2/21</h2>
+<p>Bureau of Land Management</p>
+</section><section id="will-garrick---228" class="slide level2">
+<h2>Will Garrick - 2/28</h2>
+<p>Portland State University Research Computing</p>
+</section></section>
 <section><section id="week-2-review-bian" class="titleslide slide level1"><h1>Week 2 Review: Bian</h1></section><section id="section-38" class="slide level2">
 <h2></h2>
 <ul>
@@ -987,12 +993,181 @@ SELECT * FROM employee_pay;
 </section><section id="section-39" class="slide level2">
 <h2></h2>
 <ul>
-<li><p>What types of data (spatial or otherwise) may pose conceptual issues by constraining them to ‘objects’?</p></li>
-<li><p>[ Spatial residual example in R ]</p></li>
+<li>What types of data (spatial or otherwise) may pose conceptual issues by constraining them to ‘objects’?</li>
+<li>Examples of fields?</li>
+<li>[ Spatial residual example in R ]</li>
 </ul>
 </section><section id="section-40" class="slide level2">
 <h2></h2>
 <p>When all you have is a hammer, everything looks like a nail.</p>
+</section></section>
+<section><section id="week-2-review-lab" class="titleslide slide level1"><h1>Week 2 review: Lab</h1></section><section id="section-41" class="slide level2">
+<h2>1</h2>
+<p>True or false: The AVG function returns an average of all rows from a SELECT column, includingany NULL values.</p>
+<ul>
+<li>Either!!! Null is NOTHING, not 0!</li>
+</ul>
+</section><section id="section-42" class="slide level2">
+<h2>2</h2>
+<p>Must a column appear in the SELECT statement to use a GROUP BY clause on it?</p>
+<ul>
+<li>No!</li>
+</ul>
+<pre class="fragment">SELECT AVG(prod_price)
+FRom products
+GROUP BY <span class="inner-pre" style="color:orange;">vend_id</span>;
+</pre>
+</section><section id="section-43" class="slide level2">
+<h2>3</h2>
+<p>True or false: You must also use the GROUP BY clause when using the HAVING clause.</p>
+<ul>
+<li>TRUE… some aggregation must happen!</li>
+</ul>
+</section><section id="section-44" class="slide level2">
+<h2>4</h2>
+<p>What could be a major factor concerning the representation and comparison of date and time values ifyour company is an international organization?</p>
+<ul>
+<li>Month/Day/Year vs. Day/Month/Year</li>
+</ul>
+</section><section id="section-45" class="slide level2">
+<h2>5</h2>
+<p>Will the following SELECT statements work? If not, what fixes thestatements? If so, why?</p>
+<pre >SELECT COUNT(prod_id), prod_price
+FROM products;
+</pre>
+<ul>
+<li>Doesn’t work! COUNT() will just return a single number.. either remove count or remove prod_price</li>
+</ul>
+<pre>SELECT MIN(BONUS), MAX(SALARY)
+FROM EMPLOYEE_PAY
+WHERE SALARY > 20000;
+</pre>
+<ul>
+<li>Works fine! However, what’s odd about it?</li>
+<li>Capitalization</li>
+</ul>
+</section><section id="section-46" class="slide level2">
+<h2>7</h2>
+<p>What is the average salary?</p>
+<ul>
+<li>30000.00</li>
+</ul>
+<pre class="fragment">SELECT AVG(salary)
+FROM employee_pay;</pre>
+</section><section id="section-47" class="slide level2">
+<h2>8</h2>
+<p>What is the maximum bonus?</p>
+<ul>
+<li>2000.00</li>
+</ul>
+<pre class="fragment">SELECT MAX(bonus)
+FROM employee_pay;</pre>
+</section><section id="section-48" class="slide level2">
+<h2>9</h2>
+<p>What are the total salaries?</p>
+<ul>
+<li>90000.00</li>
+</ul>
+<pre class="fragment">SELECT SUM(salary)
+FROM employee_pay;</pre>
+</section><section id="section-49" class="slide level2">
+<h2>10</h2>
+<p>What is the minimum pay rate?</p>
+<ul>
+<li>11.00</li>
+</ul>
+<pre class="fragment">SELECT MIN(pay_rate)
+FROM employee_pay;</pre>
+</section><section id="section-50" class="slide level2">
+<h2>11</h2>
+<p>How many rows are in the table?</p>
+<ul>
+<li>6</li>
+</ul>
+<pre class="fragment">SELECT COUNT(*)
+FROM employee_pay;</pre>
+</section><section id="section-51" class="slide level2">
+<h2>12</h2>
+<p>Enter the following query to show all cities in the employees table:</p>
+<pre>SELECT city
+FROM employees;</pre>
+<p>Describe how the results compare to this query:</p>
+<pre>SELECT city
+    , count(*)
+FROM employees
+GROUP BY city;</pre>
+</section><section id="section-52" class="slide level2">
+<h2>12 (2)</h2>
+<p>No duplicates, instead shows a count of how many times that city occurs.</p>
+</section><section id="section-53" class="slide level2">
+<h2>13</h2>
+<p>Modify the previous query to only return data for cities having more than one employee.</p>
+<pre class="fragment">SELECT city
+    , count(*)
+FROM employees
+GROUP BY city
+HAVING count(*) > 1;</pre>
+</section><section id="section-54" class="slide level2">
+<h2>14</h2>
+<p>Modify the previous query to order the results in descending order, from highest count to lowest.</p>
+<pre class="fragment">SELECT city
+    , count(*)
+FROM employees
+GROUP BY city
+ORDER BY 2 DESC;</pre>
+<ul>
+<li>Or…</li>
+</ul>
+<pre class="fragment">SELECT city
+    , count(*)
+FROM employees
+GROUP BY city
+ORDER BY count(*) DESC;</pre>
+</section><section id="section-55" class="slide level2">
+<h2>15</h2>
+<p>Write a query to list the average pay rate and salary by position from the employee_pay table.</p>
+<pre class="fragment">SELECT position
+    ,AVG(salary) avg_salary
+    ,AVG(pay_rate) avg_payrate
+FROM employee_pay GROUP BY position;</pre>
+</section><section id="section-56" class="slide level2">
+<h2>16</h2>
+<p>Write a query to list the average salary by position from the employee_pay table where the averagesalary is greater than $20,000.</p>
+<pre class="fragment">SELECT position
+    ,AVG(salary) avg_salary
+FROM employee_pay GROUP BY position
+HAVING AVG(salary) > 20000;</pre>
+</section><section id="section-57" class="slide level2">
+<h2>17</h2>
+<p>Using the employee table, write an SQL statement that lists employee email addresses. Email is not astored column, so give it an alias. The email address for each employee should be as follows:<a href="mailto:first.last@example.com">first.last@example.com</a>. For example, John Smith’s email address is <a href="mailto:john.smith@example.com">john.smith@example.com</a>.</p>
+<pre class="fragment">SELECT (<span style="color:orange">LOWER(first_name)</span> || '.'  || LOWER(last_name) || '@example.com') <span style="color:purple">emails</span>
+FROM employees;</pre>
+<ul>
+<li>LOWER()!</li>
+<li>give it an alias (in the instructions)!</li>
+</ul>
+</section><section id="section-58" class="slide level2">
+<h2>18</h2>
+<p>Refer to the PostgreSQL string function documentation. In particular, we want to pay attention to the substr() or substring() functions – they do the same thing, the syntax is just slightly different., These functions select just a portion of a given string, given a starting position, and the number of characters you want selected. Write a SQL statement that selects from the employees table each employee’s name, employee ID, and phone number in the following formats:</p>
+<p>The name should be displayed as “Smith, John” (this requires a case conversion function). The employee ID should be displayed as 999-99-9999. The phone number should be displayed as (999) 999-9999.</p>
+</section><section id="section-59" class="slide level2">
+<h2>18 (2)</h2>
+<p>Did you find “INITCAP”? Google and ctrl+f are <em>crucial</em>.</p>
+<pre>SELECT INITCAP('thIs funCtiON iS suPER hELPful!');</pre>
+<pre>SELECT
+<span style="color:orange">INITCAP(LOWER(last_name))</span> || ', ' || INITCAP(LOWER(first_name)) emp_name
+    , SUBSTR(emp_id,1,3) || '-' || SUBSTR(emp_id,4,2) || '-' || SUBSTR(emp_id,6,4) emp_id
+    , '(' || SUBSTR(phone,1,3) || ') ' || SUBSTR(phone,3,3) || '-' || SUBSTR(phone,6,4) emp_phone
+FROM employees;</pre>
+</section><section id="section-60" class="slide level2">
+<h2>19</h2>
+<p>Refer to the at PostgreSQL date documentation. Write a query that shows what day of the week each employee was hired.</p>
+<ul>
+<li>TO_CHAR!</li>
+</ul>
+<pre class="fragment">SELECT emp_id
+    <span style="font-color:orange">,</span>INITCAP(<span style="color:orange">TO_CHAR(date_hire,'day')</span>) hire_dat
+FROM employee_pay;</pre>
 </section></section>
 <section><section id="joins-1" class="titleslide slide level1"><h1>Joins</h1></section><section id="why" class="slide level2">
 <h2>Why?</h2>
@@ -1006,12 +1181,12 @@ SELECT * FROM employee_pay;
 INNER JOIN TableB
 ON TableA.name = TableB.name
 </pre>
-</section><section id="section-41" class="slide level2">
+</section><section id="section-61" class="slide level2">
 <h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_inner.jpg'></p>
 </div>
-</section><section id="section-42" class="slide level2">
+</section><section id="section-62" class="slide level2">
 <h2></h2>
 <pre>
 SELECT * FROM employees e 
@@ -1025,12 +1200,12 @@ ON e.state = v.vend_state;
 FULL OUTER JOIN TableB
 ON TableA.name = TableB.name
 </pre>
-</section><section id="section-43" class="slide level2">
+</section><section id="section-63" class="slide level2">
 <h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_full_outer.jpg'></p>
 </div>
-</section><section id="section-44" class="slide level2">
+</section><section id="section-64" class="slide level2">
 <h2></h2>
 <pre>
 SELECT * FROM orderitems oi
@@ -1044,12 +1219,12 @@ ON oi.prod_id = p.prod_id;
 LEFT OUTER JOIN TableB
 ON TableA.name = TableB.name
 </pre>
-</section><section id="section-45" class="slide level2">
+</section><section id="section-65" class="slide level2">
 <h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_left_outer.jpg'></p>
 </div>
-</section><section id="section-46" class="slide level2">
+</section><section id="section-66" class="slide level2">
 <h2></h2>
 <pre>
 SELECT * FROM products p
@@ -1057,7 +1232,7 @@ LEFT OUTER JOIN orderitems oi
 ON oi.prod_id = p.prod_id;
 </pre>
 <p>Returns everything that matches the ‘left’ table.</p>
-</section><section id="section-47" class="slide level2">
+</section><section id="section-67" class="slide level2">
 <h2></h2>
 <pre>
 SELECT * FROM orders o
@@ -1065,7 +1240,7 @@ JOIN customers c
 ON o.cust_id = c.cust_id;
 </pre>
 <p>Find customer info for all orders placed</p>
-</section><section id="section-48" class="slide level2">
+</section><section id="section-68" class="slide level2">
 <h2></h2>
 <pre>
 SELECT * FROM orders o
@@ -1081,12 +1256,12 @@ LEFT OUTER JOIN TableB
 ON TableA.name = TableB.name
 WHERE TableB.name IS null
 </span></pre>
-</section><section id="section-49" class="slide level2">
+</section><section id="section-69" class="slide level2">
 <h2></h2>
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/join_anti.jpg'></p>
 </div>
-</section><section id="section-50" class="slide level2">
+</section><section id="section-70" class="slide level2">
 <h2></h2>
 <pre>
 SELECT * FROM orders o
@@ -1100,6 +1275,1220 @@ WHERE o.order_num IS NULL;
 <div class="stretch">
 <p><img src='http://jacksonvoelkel.com/geog575/slide_images/homer.gif'></p>
 </div>
+</section></section>
+<section><section id="week-3-review-lab" class="titleslide slide level1"><h1>Week 3 review: Lab</h1></section><section id="section-71" class="slide level2">
+<h2>1</h2>
+<p>When using a base table to join unrelated tables, must you select any columns from the base table?</p>
+</section><section id="section-72" class="slide level2">
+<h2></h2>
+<p>No! They must be called, but don’t have to be selected.</p>
+<pre>SELECT order_num FROM orders o
+JOIN customers c
+ON o.cust_id = c.cust_id;</pre>
+</section><section id="section-73" class="slide level2">
+<h2>2</h2>
+<p>Can you join a table on more than one column?</p>
+</section><section id="section-74" class="slide level2">
+<h2></h2>
+<p>Yes</p>
+<pre>SELECT e.emp_id
+FROM employees e
+JOIN vendors v
+  ON e.first_name = v.vend_name
+  <span style="color:orange">AND</span> e.city = v.vend_city;</pre>
+<p>No error!</p>
+</section><section id="section-75" class="slide level2">
+<h2>3</h2>
+<p>What type of join would you use to return records from one table, regardless of the existence of associated records in the related table?</p>
+</section><section id="section-76" class="slide level2">
+<h2></h2>
+<p>LEFT OUTER will return everything from specified field!</p>
+<pre>SELECT c.cust_id
+FROM customers c
+<span style="color:orange">JOIN</span> orders o
+ON c.cust_id<span style="color:red">::integer</span> = o.order_num;</pre>
+<pre>SELECT c.cust_id
+FROM customers c
+<span style="color:orange">LEFT OUTER JOIN</span> orders o
+ON c.cust_id::integer = o.order_num;</pre>
+<p>In this case, LEFT OUTER JOIN results in the same thing as</p>
+<pre>SELECT cust_id FROM customers;</pre>
+</section><section id="section-77" class="slide level2">
+<h2></h2>
+<p>Remember: LEFT OUTER JOIN is the same as LEFT JOIN (you can’t have the left side of the ‘inner’ part)</p>
+<pre>SELECT c.cust_id
+FROM customers c
+<span style="color:orange">LEFT JOIN</span> orders o
+ON c.cust_id::integer = o.order_num;</pre>
+</section><section id="section-78" class="slide level2">
+<h2>4</h2>
+<p>What type of join do you use to test equality among rows of related tables?</p>
+</section><section id="section-79" class="slide level2">
+<h2></h2>
+<p>INNER JOIN</p>
+<ul>
+<li>Only returns matches between the tables</li>
+</ul>
+</section><section id="section-80" class="slide level2">
+<h2>5</h2>
+<p>What happens if you select from two different tables but fail to join the tables?</p>
+</section><section id="section-81" class="slide level2">
+<h2></h2>
+<p>A Cartesian Product!</p>
+<pre>SELECT * from employees<span style="color:orange">,</span> employee_pay;</pre>
+<pre>SELECT * from employees e
+<span style="color:orange">JOIN</span> employee_pay ep
+  ON e.emp_id = ep.emp_id;</pre>
+</section><section id="section-82" class="slide level2">
+<h2>6</h2>
+<p>What is the function of a subquery when used with a SELECT statement?</p>
+</section><section id="section-83" class="slide level2">
+<h2></h2>
+<ul>
+<li>Similar to ‘IN’</li>
+<li>Allows for more complex queries</li>
+<li>Allows for more ‘dynamic’ processes</li>
+</ul>
+</section><section id="section-84" class="slide level2">
+<h2>7</h2>
+<p>Which of the query combining operators accomplishes each of these:</p>
+</section><section id="section-85" class="slide level2">
+<h2>7.1</h2>
+<p>Shows duplicates</p>
+</section><section id="section-86" class="slide level2">
+<h2></h2>
+<p>UNION ALL</p>
+</section><section id="section-87" class="slide level2">
+<h2>7.2</h2>
+<p>Return only rows from the first query that match those in the second query</p>
+</section><section id="section-88" class="slide level2">
+<h2></h2>
+<p>INTERSECT</p>
+</section><section id="section-89" class="slide level2">
+<h2>7.3</h2>
+<p>Return no duplicates</p>
+</section><section id="section-90" class="slide level2">
+<h2></h2>
+<p>UNION</p>
+</section><section id="section-91" class="slide level2">
+<h2>7.4</h2>
+<p>Return only rows from the first query not returned by the second</p>
+</section><section id="section-92" class="slide level2">
+<h2></h2>
+<p>EXCEPT</p>
+</section><section id="section-93" class="slide level2">
+<h2>8</h2>
+<p>Using a subquery, write a query that returns the names of all employees who have a pay rate greater than Linda Plew, whose employee identification number is 442346889.</p>
+</section><section id="section-94" class="slide level2">
+<h2></h2>
+<p>First (more of a mental excercise):</p>
+<pre class="fragment">SELECT pay_rate
+FROM employee_pay
+WHERE emp_id = '442346889';</pre>
+</section><section id="section-95" class="slide level2">
+<h2></h2>
+<p>Second:</p>
+<pre>SELECT emp_id
+FROM employee_pay
+WHERE pay_rate > (
+    SELECT pay_rate
+    FROM employee_pay
+    WHERE emp_id = '442346889');</pre>
+</section><section id="section-96" class="slide level2">
+<h2></h2>
+<p>Final:</p>
+<pre>SELECT first_name
+FROM employees
+WHERE emp_id IN (
+SELECT emp_id
+FROM employee_pay
+WHERE pay_rate > (
+    SELECT pay_rate
+    FROM employee_pay
+    WHERE emp_id = '442346889'));</pre>
+</section><section id="section-97" class="slide level2">
+<h2></h2>
+<p>… or, nicer:</p>
+<pre>SELECT INITCAP(first_name) || ' ' || INITCAP(last_name) AS emp_name
+FROM employees
+WHERE emp_id IN (
+SELECT emp_id
+FROM employee_pay
+WHERE pay_rate > (
+    SELECT pay_rate
+    FROM employee_pay
+    WHERE emp_id = '442346889'));</pre>
+</section><section id="section-98" class="slide level2">
+<h2></h2>
+<p>Other?</p>
+</section><section id="section-99" class="slide level2">
+<h2>9</h2>
+<p>Using a subquery, write a query that lists all products that cost more than the average cost of all products.</p>
+</section><section id="section-100" class="slide level2">
+<h2></h2>
+<p>First:</p>
+<pre>SELECT AVG(prod_price)
+FROM Products;</pre>
+</section><section id="section-101" class="slide level2">
+<h2></h2>
+<p>Final:</p>
+<pre>SELECT prod_name
+    ,prod_price
+FROM Products
+WHERE prod_price > (
+    SELECT AVG(prod_price)
+    FROM Products);</pre>
+</section><section id="section-102" class="slide level2">
+<h2>10</h2>
+<p>Write a compound query to find the customers who have placed an order.</p>
+</section><section id="section-103" class="slide level2">
+<h2></h2>
+<pre>SELECT cust_id
+FROM Customers;</pre>
+<pre>SELECT cust_id
+FROM Orders;</pre>
+</section><section id="section-104" class="slide level2">
+<h2></h2>
+<pre>SELECT cust_id
+FROM Customers
+INTERSECT
+SELECT cust_id
+FROM Orders;</pre>
+</section><section id="section-105" class="slide level2">
+<h2>11</h2>
+<p>Write a compound query to find the customers who have not placed an order.</p>
+</section><section id="section-106" class="slide level2">
+<h2></h2>
+<pre>SELECT cust_id
+FROM Customers
+EXCEPT
+SELECT cust_id
+FROM Orders;</pre>
+</section></section>
+<section><section id="normalization" class="titleslide slide level1"><h1>Normalization</h1></section></section>
+<section><section id="first-normal-form" class="titleslide slide level1"><h1>First Normal Form</h1></section><section id="section-107" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_1st.png'></p>
+</div>
+</section><section id="section-108" class="slide level2">
+<h2></h2>
+<p>What is wrong with multiple values in a single field?</p>
+<ul>
+<li>All or nothing (no unique values)</li>
+</ul>
+</section><section id="section-109" class="slide level2">
+<h2></h2>
+<p>Are we done?</p>
+<blockquote class="fragment">
+If a table is not in first normal form, remove the multivalued information from the table. Create a new table with that information and the primary key of the original table
+</blockquote>
+</section><section id="section-110" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_1st_2.png'></p>
+</div>
+</section></section>
+<section><section id="second-normal-form" class="titleslide slide level1"><h1>Second Normal Form</h1></section><section id="section-111" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_2nd_1.png'></p>
+</div>
+<p>Is it in first normal form? What is the PK?</p>
+<ul>
+<li>empID and project_num</li>
+</ul>
+</section><section id="section-112" class="slide level2">
+<h2></h2>
+<p>Issue:</p>
+<p class="fragment">
+We don’t <i>need</i> the primary key to figure out everything!
+</p>
+<p class="fragment">
+What are hours dependent on?
+</p>
+<ul>
+<li>empID</li>
+<li>proj_num</li>
+</ul>
+<p class="fragment">
+What is ‘contact’ denpendent on? ‘project_name’?
+</p>
+<ul>
+<li>proj_num</li>
+</ul>
+</section><section id="section-113" class="slide level2">
+<h2></h2>
+<blockquote>
+A table is in second normal form if it is in first normal form AND we need ALL the fields in the key to determine the values of the non–key fields.
+</blockquote>
+</section><section id="section-114" class="slide level2">
+<h2></h2>
+<blockquote>
+If a table is not in second normal form, remove those non–key fields that are not dependent on the whole of the primary key. Create another table with these fields and the part of the primary key on which they do depend
+</blockquote>
+</section><section id="section-115" class="slide level2">
+<h2></h2>
+<p>What tables should we make?</p>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_2nd_1.png'></p>
+</div>
+</section><section id="section-116" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_2nd_2.png'></p>
+</div>
+<p>Do we need all of the fields in the key to determin the values of the non-key fields?</p>
+</section><section id="section-117" class="slide level2">
+<h2></h2>
+<p>Note: we can still have multi-field PKs! But every other field must be dependent upon the <i><b>entire</b></i> PK!</p>
+</section></section>
+<section><section id="third-normal-form" class="titleslide slide level1"><h1>Third Normal Form</h1></section><section id="section-118" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_1.png'></p>
+</div>
+<div style="text-align:left">
+<p>What is the Pk? <span class="fragment" style="color:orange">empID</span></p>
+<p>Is it in Frist Normal Form? <span class="fragment" style="color:orange">Yes</span></p>
+<p>Is it in Second Normal Form? <span class="fragment" style="color:orange">Yes, empID is the only part of the key!</span></p>
+</div>
+</section><section id="so-what-is-wrong" class="slide level2">
+<h2>So what is wrong?</h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_1.png'></p>
+</div>
+<ul>
+<li><p>dep_name repeats</p></li>
+<li><p>What can determine dep_name?</p></li>
+<li>if empID = 1001… dep_name = Marketing</li>
+<li><p>if dept_num = 2… dep_name = Marketing</p></li>
+</ul>
+</section><section id="section-119" class="slide level2">
+<h2></h2>
+<blockquote>
+A table is in third normal form if it is in second normal form AND no non–key fields are depend on a field(s) that is not the primary key.
+</blockquote>
+</section><section id="section-120" class="slide level2">
+<h2></h2>
+<blockquote>
+If a table is not in third normal form, remove the non–key fields that are dependent on a field(s) that is not the primary key. Create another table with this field(s) and the field on which it does depend.
+</blockquote>
+</section><section id="section-121" class="slide level2">
+<h2></h2>
+<p>What should we do?</p>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_1.png'></p>
+</div>
+<ul>
+<li>Split into two tables:</li>
+<li>Employee</li>
+<li>Department</li>
+</ul>
+</section><section id="section-122" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm_3rd_2.png'></p>
+</div>
+</section></section>
+<section><section id="boyce-codd-normal-form" class="titleslide slide level1"><h1>Boyce-Codd Normal Form</h1></section><section id="section-123" class="slide level2">
+<h2></h2>
+<blockquote>
+A table is in Boyce–Codd normal form if every determinant could be a primary key
+</blockquote>
+<p>If any field is a <span style="color:orange">determinant</span>, it must be able to be the PK.</p>
+<ul>
+<li>Determinant = determines the value of some other field</li>
+</ul>
+</section><section id="section-124" class="slide level2">
+<h2></h2>
+<div style="text-align:left">
+<p class="fragment">
+[1st] A <span style="color:orange">table</span> is based on
+</p>
+<p class="fragment">
+[2nd] the <span style="color:orange">key</span>,
+</p>
+<p class="fragment">
+[3rd] the <span style="color:orange">whole key</span>,
+</p>
+<p class="fragment">
+[ BC] and <span style="color:orange">nothing but the key</span> (so help me Codd)
+</p>
+</div>
+</section></section>
+<section><section id="from-first-to-third" class="titleslide slide level1"><h1>From First to Third</h1></section><section id="first" class="slide level2">
+<h2>FIRST</h2>
+<p>Require there be only one value per cell.</p>
+<div class="stretch" style="background-color:white">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_first.png'></p>
+</div>
+</section><section id="section-125" class="slide level2">
+<h2></h2>
+<div class="stretch" style="background-color:white">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_first_2.png'></p>
+</div>
+</section><section id="second" class="slide level2">
+<h2>SECOND</h2>
+<p>Row must depend on the entire primary key.</p>
+<div class="stretch" style="background-color:white">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_second_1.png'></p>
+</div>
+</section><section id="section-126" class="slide level2">
+<h2></h2>
+<div class="stretch" style="background-color:white">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_second_2.png'></p>
+</div>
+<ul>
+<li>Room number doesn’t depend on last name or first name.</li>
+<li>Moving to a new ‘Class’ class makes use lose a natural PK! We’ll need a synthetic one on ‘Students’.</li>
+</ul>
+</section><section id="section-127" class="slide level2">
+<h2></h2>
+<p><small>A student’s grade is not <i>wholly</i> dependent on a student, rather it is dependent on <i>both</i> a student and the class they are in.</small></p>
+<div class="stretch" style="background-color:white">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_third_1.png'></p>
+</div>
+<p><small>Grades table now has a PK built from two FKs.</small></p>
+</section><section id="section-128" class="slide level2">
+<h2></h2>
+<p>Do we stil need “status” in it’s own table?</p>
+<div style="text-align:left">
+<p>Is dependent on ‘Last Name’ + ’First Name? <span class="fragment" style="color:orange">Well, there <i>could</i> be more than one Bruce Wayne</span></p>
+<p>What should we do? <span class="fragment" style="color:orange">I would leave it in a seperate table.</span></p>
+</div>
+<div class="stretch" style="background-color:white">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/norm2_third_1.png'></p>
+</div>
+</section></section>
+<section><section id="week-3-reading-assignment" class="titleslide slide level1"><h1>Week 3 Reading Assignment</h1></section><section id="some-notes" class="slide level2">
+<h2>Some Notes</h2>
+<div style="text-align:left">
+<ul>
+<li>My aim this week was to get you some experience.</li>
+<li>Hard with fake data</li>
+<li>Author throws in curveballs</li>
+<li>It’s still quite a good book…</li>
+<li>… but we are moving on from it.</li>
+<li>Want to know the answers, according to Churcher?</li>
+</ul>
+</div>
+</section></section>
+<section><section id="next-week-2" class="titleslide slide level1"><h1>Next week:</h1></section><section id="assignment-more-normalizaton" class="slide level2">
+<h2>Assignment: More Normalizaton</h2>
+</section><section id="lab-table-creation" class="slide level2">
+<h2>Lab: Table Creation</h2>
+</section><section id="a-brief-rundown-of-indexes" class="slide level2">
+<h2>A Brief rundown of Indexes</h2>
+<ul>
+<li>Indices?</li>
+<li><a href="https://www.postgresql.org/docs/9.6/static/indexes.html" target="_blank">Indexes?</a></li>
+<li>Whatever.</li>
+</ul>
+</section><section id="midterm-prep" class="slide level2">
+<h2>Midterm prep!</h2>
+</section></section>
+<section><section id="week-4-lab" class="titleslide slide level1"><h1>Week 4 Lab</h1></section><section id="section-129" class="slide level2">
+<h2>1</h2>
+<p>Write the SQL to add the following products to the product table:</p>
+<table>
+<thead>
+<tr class="header">
+<th>prod_id</th>
+<th>vend_id</th>
+<th>prod_name</th>
+<th>prod_price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CO02</td>
+<td>FNG01</td>
+<td>Fireman Costume</td>
+<td>24.99</td>
+</tr>
+<tr class="even">
+<td>CO03</td>
+<td>FNG01</td>
+<td>Policeman Costume</td>
+<td>24.99</td>
+</tr>
+<tr class="odd">
+<td>MISC01</td>
+<td>JTS01</td>
+<td>Kiddie Grab Bag</td>
+<td>4.99</td>
+</tr>
+</tbody>
+</table>
+</section><section id="section-130" class="slide level2">
+<h2></h2>
+<pre>INSERT INTO products (
+        prod_id
+        , vend_id
+        , prod_name
+        , prod_price)
+VALUES  ('CO02','FNG01','Fireman Costume',24.99),
+        ('CO03','FNG01','Policeman Costume',24.99),
+        ('MISC01','JTS01','Kiddie Grab Bag',4.99);</pre>
+</section><section id="section-131" class="slide level2">
+<h2>2</h2>
+<p>Write SQL to correct the cost of the two costumes added. The cost should be the same as the witch costume. note: you should not do this by simply looking up the cost, then updating the data, your SQL statement should include the querying of the database to get the cost of the costume. This can and should be done in a single statement.</p>
+</section><section id="section-132" class="slide level2">
+<h2></h2>
+<pre>UPDATE products
+SET prod_price = (
+        SELECT prod_price FROM products
+        WHERE prod_name='Witch Costume')
+WHERE prod_name LIKE '%Costume%'
+AND prod_price != (
+        SELECT prod_price FROM products
+        WHERE prod_name = 'Witch Costume');</pre>
+</section><section id="section-133" class="slide level2">
+<h2>3</h2>
+<p>Now we have decided to cut our product line, starting with the new products. Remove the three products you just added.</p>
+</section><section id="section-134" class="slide level2">
+<h2></h2>
+<pre>
+DELETE FROM products WHERE prod_id IN (‘CO02’,‘CO03’,‘MISC01’);
+<p re>
+</section><section id="section-135" class="slide level2">
+<h2>4</h2>
+<p>Before you executed the statements to remove the products you added, what could you have done to ensure that you only delete the desired rows?</p>
+<p>Consider a table created with this command:</p>
+<pre>CREATE TABLE students (
+  id_num varchar(9) NOT NULL,
+  last_name varchar(15) NOT NULL,
+  first_name varchar(15) NOT NULL,
+  middle_name varchar(15) NOT NULL,
+  address varchar(30) NOT NULL,
+  city varchar(15) NOT NULL,
+  state varchar(2) NOT NULL,
+  zip varchar(5) NOT NULL,
+  date_enrolled date);</pre>
+</section><section id="section-136" class="slide level2">
+<h2>5</h2>
+<p>Write a statement that creates a primary key constraint using the id_num column.</p>
+</section><section id="section-137" class="slide level2">
+<h2></h2>
+<pre>ALTER TABLE students
+ADD PRIMARY KEY (id_num);</pre>
+</section><section id="section-138" class="slide level2">
+<h2>6</h2>
+<p>Write a statement to allow the middle_name column to accept NULL values.</p>
+</section><section id="section-139" class="slide level2">
+<h2></h2>
+<pre>ALTER TABLE students
+ALTER COLUMN middle_name DROP NOT NULL;</pre>
+</section><section id="section-140" class="slide level2">
+<h2>7</h2>
+<p>Write a statement that would restrict the people added into table to only reside in the state of New York (‘NY’)?</p>
+</section><section id="section-141" class="slide level2">
+<h2></h2>
+<pre>ALTER TABLE students
+ADD CONSTRAINT checkState CHECK(state = 'NY');</pre>
+</section><section id="section-142" class="slide level2">
+<h2>8</h2>
+<p>What statement would you use to add an auto-incrementing column called student_id to the preceding table?</p>
+</section><section id="section-143" class="slide level2">
+<h2></h2>
+<pre>ALTER TABLE students
+ADD COLUMN student_id SERIAL;</pre>
+</section><section id="section-144" class="slide level2">
+<h2>9</h2>
+<p>If you haven’t already, create the table and execute commands 5-8. Now, add yourself to the table as a student, but using the zipcode ‘01230’. What SQL did you use?</p>
+</section><section id="section-145" class="slide level2">
+<h2></h2>
+<pre>INSERT INTO students(id_num,                                                     
+ last_name,
+ first_name,
+ middle_name,
+ address,
+ city,
+ state,
+ zip,
+ date_enrolled)
+VALUES(969645908,
+ 'Voelkel',
+ 'Jackson',
+ 'Lee',
+ '506 SW Mill St.',
+ 'Yonkers',
+ <span style="color:orange">'NY'</span>,
+ '01230',
+ '2/07/2018');</pre>
+</section><section id="section-146" class="slide level2">
+<h2>10</h2>
+<p>Now write a SQL statement that converts the zipcode column to an integer (this is tricky, but here’s a hint, you’ll need to include USING cast(zip as integer) in your statement.</p>
+</section><section id="section-147" class="slide level2">
+<h2></h2>
+<pre>ALTER TABLE students
+ALTER COLUMN zip TYPE INTEGER USING CAST(zip AS INTEGER)</pre>
+<p>… or …</p>
+<pre>ALTER TABLE students
+ALTER COLUMN zip TYPE INTEGER USING zip::integer</pre>
+</section><section id="section-148" class="slide level2">
+<h2>11</h2>
+<p>What does the cast function do?</p>
+</section><section id="section-149" class="slide level2">
+<h2>12</h2>
+<p>Now read back the row you added to the table. What happened to the zipcode? Why?</p>
+</section><section id="section-150" class="slide level2">
+<h2>13</h2>
+<p>Write and execute the SQL to create a view students_ny that shows only those students in New York state.</p>
+</section><section id="section-151" class="slide level2">
+<h2></h2>
+<pre>CREATE VIEW students_ny AS
+SELECT * from students
+WHERE state = 'NY';</pre>
+</section><section id="section-152" class="slide level2">
+<h2>14</h2>
+<p>Write a SQL statement creates a summarized view containing the average pay rate and average salary for each city in the employees table.</p>
+</section><section id="section-153" class="slide level2">
+<h2></h2>
+<pre>CREATE VIEW avg_pay_city AS
+SELECT AVG(P.pay_rate) avg_rate
+    , AVG(P.salary) avg_salary
+    , E.city
+FROM employee_pay P, employees AS E
+WHERE P.emp_id = E.emp_id
+GROUP BY E.city;</pre>
+</section><section id="section-154" class="slide level2">
+<h2>15</h2>
+<p>Make sure your view from question 13 exists. Now, write a SQL statement that drops the students table. What happens when you execute this statement? How do you make it work using a single statement?</p>
+</section><section id="section-155" class="slide level2">
+<h2></h2>
+<pre>DROP TABLE students CASCADE;</pre>
+</section></section>
+<section><section id="normalization-assignment" class="titleslide slide level1"><h1>Normalization Assignment</h1></section><section id="whats-the-most-wrong" class="slide level2">
+<h2>What’s (the most) wrong?</h2>
+<ul>
+<li>Multiple values… this isn’t really a table!</li>
+</ul>
+</section><section id="section-156" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th>Park</th>
+<th>Amenity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Baseball</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Soccer</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>Playground</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Soccer</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Horesshoes</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Soccer</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Baseball</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Basketball</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>Playground</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Baseball</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>Soccer</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Basketball</td>
+</tr>
+</tbody>
+</table>
+</section><section id="section-157" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th>park_id</th>
+<th>park_name</th>
+<th>area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Arbor Lodge Park</td>
+<td>8.69</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Gammans Park</td>
+<td>1.66</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Columbia Park</td>
+<td>34.52</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>McCoy Park</td>
+<td>3.57</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Columbia Park Pool</td>
+<td>0.85</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>University CC</td>
+<td>4.46</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>University Park</td>
+<td>7.03</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Portsmouth Park</td>
+<td>4.03</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>St. Johns Community Center</td>
+<td>1.34</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Pier Park</td>
+<td>83.43</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>St J. Racquet C.</td>
+<td>1.26</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>St J. Park</td>
+<td>4.53</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>McKenna Park</td>
+<td>4.52</td>
+</tr>
+</tbody>
+</table>
+</section><section id="now-what" class="slide level2">
+<h2>Now what?</h2>
+</section><section id="section-158" class="slide level2">
+<h2></h2>
+<table>
+<thead>
+<tr class="header">
+<th>nbo_id</th>
+<th>nbo_name</th>
+<th>assoc_chair</th>
+<th>pop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Arbor Lodge</td>
+<td>Jed Baum</td>
+<td>4881</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Portsmouth</td>
+<td>John Smith</td>
+<td>10822</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>St. Johns</td>
+<td>Peter Gabrian</td>
+<td>14294</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>University Park</td>
+<td>Dr. Smarty Pants</td>
+<td>5802</td>
+</tr>
+</tbody>
+</table>
+</section><section id="can-we-include-nbo_id-in-the-parks-table" class="slide level2">
+<h2>Can we include nbo_id in the parks table?</h2>
+<ul>
+<li>Why?</li>
+</ul>
+</section><section id="what-else-is-wrong" class="slide level2">
+<h2>What else is wrong?</h2>
+<ul>
+<li>Portsmouth Park</li>
+<li>University Park</li>
+<li>… Columbia Park</li>
+</ul>
+</section><section id="what-do-we-need-to-add" class="slide level2">
+<h2>What do we need to add?</h2>
+</section><section id="intermediary-table" class="slide level2">
+<h2>Intermediary Table</h2>
+<table>
+<thead>
+<tr class="header">
+<th>park_id</th>
+<th>nbo_id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="midterm" class="titleslide slide level1"><h1>Midterm</h1></section><section id="what-are-we-looking-at" class="slide level2">
+<h2>What are we looking at?</h2>
+<p><a href="https://www.youtube.com/watch?v=13liVWaR5yo" target="_blank">Assateague Wild Horses</a></p>
+</section><section id="project-overview" class="slide level2">
+<h2>Project Overview</h2>
+<div style="text-align:left">
+<p class="fragment">
+Two new tables: allpony and banddata
+</p>
+<p class="fragment">
+Create a fully normalized data model
+</p>
+<p class="fragment">
+No ‘manual’ manipulation (e.g. Excel)
+</p>
+</div>
+</section><section id="deliverables" class="slide level2">
+<h2>Deliverables</h2>
+<div style="text-align:left">
+<p class="fragment">
+A brief report (~500 words); ER diagram (with cardinality, PK/FK)
+</p>
+<p class="fragment">
+SQL code; this <i>must</i> run!
+</p>
+</div>
+</section><section id="advice" class="slide level2">
+<h2>Advice</h2>
+<div style="text-align:left">
+<p class="fragment">
+Do not create data that isn’t there (not including synthetic PKs)
+</p>
+<p class="fragment">
+Do no worry about future data needs - model the data you have <b>only</b>
+</p>
+<p class="fragment">
+Use the comma_split() function
+</p>
+<pre class="fragment">SELECT 'apple,orange,kiwi,grapefruit', 'a,b,c,d'</pre>
+<pre class="fragment">SELECT
+  comma_split('apple,orange,kiwi,grapefruit')
+  , comma_split('a,b,c,d');</pre>
+<p class="fragment">
+Print out the heads of the tables
+</p>
+<p class="fragment">
+Draw, draw, draw - ER diagrams can help
+</p>
+<p class="fragment">
+Get your hands dirty - experiment with the data
+</p>
+</div>
+</section><section id="other-info" class="slide level2">
+<h2>Other info</h2>
+I will be out of town and busy from Thursday until Sunday morning, but you <em>might</em> get a response from me on slack <span class="fragment">… and you can always contact other classmates!
+</p>
+</section></section>
+<section><section id="next-week-3" class="titleslide slide level1"><h1>Next week</h1></section><section id="midterm-1" class="slide level2">
+<h2>Midterm</h2>
+<ul>
+<li>anger</li>
+<li>frustration</li>
+<li>lessons learned</li>
+</ul>
+</section><section id="indexes" class="slide level2">
+<h2>Indexes</h2>
+<ul>
+<li>What are they doing?</li>
+<li>Why are they important?</li>
+</ul>
+</section><section id="and" class="slide level2">
+<h2>and …</h2>
+</section><section id="section-159" class="slide level2">
+<h2></h2>
+<div class="stretch fragment">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/spatial_data.gif'> <img src='http://jacksonvoelkel.com/geog575/slide_images/scream.gif'></p>
+</div>
+</section></section>
+<section><section id="congrats-you-finished-the-midterm" class="titleslide slide level1"><h1>Congrats, you finished the midterm!</h1></section></section>
+<section><section id="midterm-2" class="titleslide slide level1"><h1>Midterm #2</h1></section><section id="section-160" class="slide level2">
+<h2></h2>
+<p>(Just kidding)</p>
+</section></section>
+<section><section id="midterm-recap" class="titleslide slide level1"><h1>Midterm recap</h1></section><section id="what-is-wrong" class="slide level2">
+<h2>What is wrong?</h2>
+</section><section id="how-do-we-fix-it" class="slide level2">
+<h2>How do we fix it?</h2>
+<p><span class="fragment">First, let’s make a <code>horses</code> table!</span></p>
+</section><section id="creating-horses-table" class="slide level2">
+<h2>Creating horses table</h2>
+<pre>CREATE TABLE horses (
+    horse_id <span style="color:orange">CHAR(10) NOT NULL PRIMARY KEY</span>
+    , birth_date  <span style="color:orange">date NULL</span>
+    , status  <span style="color:orange">CHAR(15)</span>
+    , sex  <span style="color:orange">CHAR(1)</span>
+    , color  <span style="color:orange">CHAR(20)</span>
+    , "name"  <span style="color:orange">CHAR(40)</span>
+    , howmarked  <span style="color:orange">CHAR(70)</span>
+    , date_terminate  <span style="color:orange">DATE</span>
+    , notes  <span style="color:orange">TEXT</span>
+    , sire_genetic  <span style="color:orange">CHAR(10)</span>
+);</pre>
+</section><section id="inserting-data-into-horses" class="slide level2">
+<h2>Inserting data into horses</h2>
+<pre>INSERT INTO horses (
+    horse_id
+    , birth_date
+    , status
+    , sex
+    , color
+    , "name"
+    , howmarked
+    , date_terminate
+    , notes
+    , sire_genetic)</pre>
+<p>…</p>
+</section><section id="section-161" class="slide level2">
+<h2></h2>
+<pre>SELECT DISTINCT 
+    horse_id
+    , birth_date
+    , status
+    , sex
+    , color
+    , "name"
+    , howmarked
+    , date_terminate
+    , notes
+    , sire_genetic
+FROM allpony
+-- Adding a similar table from banddata
+--  onto the above selection:
+UNION</pre>
+<p>…</p>
+</section><section id="section-162" class="slide level2">
+<h2></h2>
+<pre>SELECT DISTINCT 
+    id
+    , CAST(NULL AS DATE) AS birth_date
+    , NULL AS status
+    , sex
+    , color
+    , "name"
+    , NULL as howmarked
+    , CAST(NULL AS DATE) AS date_terminate
+    , NULL AS notes
+    , NULL AS sire_genetic
+FROM banddata
+--Using a subquery to find all horses that were
+--  not accounted for in allpony.
+WHERE id in (
+    SELECT DISTINCT id FROM banddata
+    EXCEPT
+    SELECT DISTINCT horse_id from allpony);
+SELECT * FROM horses;</pre>
+</section><section id="cont.-dates" class="slide level2">
+<h2>Cont. dates</h2>
+<p>Now, let’s make a <code>cont_dates</code> table!</p>
+</section><section id="create-the-table" class="slide level2">
+<h2>Create the table</h2>
+<pre>DROP TABLE IF EXISTS cont_dates;
+CREATE TABLE cont_dates (
+    horse_id <span style="color:orange">CHAR(10) REFERENCES horses(horse_id)</span>
+    , cont_date <span style="color:orange">CHAR(7)</span>
+    -- Adding a primary key as the combination of both fields:
+    , PRIMARY KEY(horse_id,cont_date)
+);</pre>
+</section><section id="inserting-data" class="slide level2">
+<h2>Inserting data</h2>
+<pre>INSERT INTO cont_dates
+--Using the comma_split function to fix multi-value issue:
+SELECT DISTINCT horse_id, comma_split(conthow) AS cont_date
+FROM allpony;
+SELECT * FROM cont_dates;</pre>
+</section><section id="births" class="slide level2">
+<h2>Births</h2>
+<p>We need a table to record foal <code>births</code>!</p>
+</section><section id="births-creation" class="slide level2">
+<h2>‘births’ creation</h2>
+<pre>DROP TABLE IF EXISTS births;
+CREATE TABLE births (
+    horse_id <span style="color:orange">CHAR(10) REFERENCES horses(horse_id)</span>
+    , foal_yr <span style="color:orange">CHAR(4)</span>
+    -- Adding a primary key as the combination of both fields:
+    , PRIMARY KEY(horse_id,foal_yr)
+);</pre>
+</section><section id="inserting-data-to-births" class="slide level2">
+<h2>Inserting data to ‘births’</h2>
+<pre>INSERT INTO births
+SELECT horse_id, <span style="color:green">comma_split</span>(foals_produced) AS foal_yr
+FROM allpony;
+SELECT * FROM births;</pre>
+</section><section id="observations" class="slide level2">
+<h2>Observations</h2>
+<p>We can de-clutter the banddata table even further by selecting out some distinct band <code>observations</code></p>
+</section><section id="section-163" class="slide level2">
+<h2></h2>
+<pre>DROP TABLE IF EXISTS band_obs CASCADE;
+-- Creating a new table from all fields that revolve 
+-- around band information/observations.
+CREATE TABLE band_obs AS
+SELECT DISTINCT "date"
+    , band
+    , bandsize
+    , "zone"
+    , <span style="color:orange">UPPER("location")</span> as "location"
+    , <span style="color:orange">UPPER(habitat)</span> as "habitat"
+    , utm_east
+    , utm_north
+FROM banddata;
+
+ALTER TABLE band_obs
+ADD COLUMN obs_id SERIAL PRIMARY KEY;
+SELECT * FROM band_obs;</pre>
+<p>What’s the deal with <span style="color:orange">UPPER()</span>?</p>
+</section><section id="intermediary-table-1" class="slide level2">
+<h2>Intermediary Table</h2>
+<p>Finally, we need a table to join Horses to Observations!</p>
+</section><section id="creating-the-table" class="slide level2">
+<h2>Creating the table</h2>
+<pre>CREATE TABLE horse_obsID AS
+SELECT id, obs_id FROM band_obs AS j left JOIN banddata AS b
+    ON <span style="color:green">concat</span>(j.band
+      , j.date
+      , j.zone
+      , UPPER(j.location)
+      , UPPER(j.habitat)
+      , j.bandsize) = 
+    <span style="color:green">concat</span>(b.band
+      , b.date
+      , b.zone
+      , UPPER(b.location)
+      , UPPER(b.habitat)
+      , b.bandsize);</pre>
+</section><section id="adding-constraints" class="slide level2">
+<h2>Adding constraints</h2>
+<pre>ALTER TABLE horse_obsID
+ADD CONSTRAINT horse_fk FOREIGN KEY (id) REFERENCES horses(horse_id);
+ALTER TABLE horse_obsID
+ADD CONSTRAINT obs_fk FOREIGN KEY (obs_id) REFERENCES band_obs(obs_id);
+ALTER TABLE horse_obsID
+ADD CONSTRAINT horse_obsID_pk PRIMARY KEY(id,obs_id);
+
+SELECT * FROM horse_obsID
+order by obs_id DESC;</pre>
+</section><section id="does-it-work" class="slide level2">
+<h2>Does it work?</h2>
+<pre>SELECT *
+FROM band_obs, horses, horse_obsID
+WHERE horse_obsID.obs_id = band_obs.obs_id
+    AND horses.horse_id = horse_obsID.id
+    AND horses.horse_id = 'M2M'
+ORDER BY band_obs.date;</pre>
+</section><section id="entity-relation-diagram" class="slide level2">
+<h2>Entity-Relation Diagram</h2>
+<p>Where do we start?</p>
+<p>Any volunteers?</p>
+</section><section id="section-164" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/midterm_er.jpg'></p>
+</div>
+</section><section id="time-spent" class="slide level2">
+<h2>Time spent?</h2>
+</section><section id="why-did-we-do-this" class="slide level2">
+<h2>Why did we do this?</h2>
+<ul>
+<li>Why would anyone do this?</li>
+<li>Drive home clean data</li>
+<li>SQL practice</li>
+</ul>
+</section><section id="is-this-forever" class="slide level2">
+<h2>Is this forever?</h2>
+<p>No!</p>
+<ul>
+<li>Start clean!</li>
+</ul>
+</section></section>
+<section><section id="indexes-1" class="titleslide slide level1"><h1>Indexes</h1></section><section id="finding-information" class="slide level2">
+<h2>Finding Information</h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/Index_1.jpg'></p>
+</div>
+</section><section id="section-165" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/Index_2.jpg'></p>
+</div>
+</section><section id="section-166" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/Index_3.jpg'></p>
+</div>
+</section><section id="section-167" class="slide level2">
+<h2></h2>
+<div class="stretch">
+<p><img src='http://jacksonvoelkel.com/geog575/slide_images/Index_4.jpg'></p>
+</div>
+</section></section>
+<section><section id="spatial-data" class="titleslide slide level1"><h1>Spatial Data</h1></section><section id="section-168" class="slide level2">
+<h2></h2>
+<p>Spatial isn’t special <span class="fragment">… at least to a RDMS!</span></p>
+<pre class="fragment">select * from schools;</pre>
+</section><section id="storing-geometry" class="slide level2">
+<h2>Storing Geometry</h2>
+<p>Why did that look so weird?</p>
+<pre class="fragment">select  school_id 
+        ,name 
+        ,address 
+        ,city   
+        ,level 
+        ,district 
+        ,type  
+        , ST_ASTEXT(ST_Transform(geom,4326)) geom
+from schools;</pre>
+</section><section id="projections" class="slide level2">
+<h2>Projections</h2>
+<pre>SELECT  school_id 
+        ,name 
+        ,address 
+        ,city   
+        ,level 
+        ,district 
+        ,type  
+        , ST_AsEWKT(geom)
+FROM schools
+LIMIT 10;</pre>
+<p><a href="http://spatialreference.org/ref/epsg/2913/" target="_blank">What is this ‘2913’?</a></p>
+</section><section id="supported-geometries" class="slide level2">
+<h2>Supported Geometries</h2>
+<div class="stretch">
+<p><img height="580px" src='http://jacksonvoelkel.com/geog575/slide_images/OGC_geometries.png'></p>
+</div>
+</section><section id="section-169" class="slide level2">
+<h2></h2>
+<pre>select * from blockgrp2010
+limit 100;</pre>
+<pre class="fragment">SELECT  fips
+        , pop10
+        , du10
+        , ST_AsTEXT(ST_Transform(geom, 4326))
+FROM blockgrp2010
+LIMIT 100;</pre>
+</section><section id="section-170" class="slide level2">
+<h2></h2>
+<p>Easy to convert to GeoJSON (web GIS!)</p>
+<pre>SELECT  fips
+        , ST_AsGeoJSON(ST_Transform(geom, 4326))
+FROM blockgrp2010
+LIMIT 100;</pre>
+</section><section id="section-171" class="slide level2">
+<h2></h2>
+<p>… and that’s it for today!</p>
+</section><section id="next-week-4" class="slide level2">
+<h2>Next Week</h2>
+<ul>
+<li>Longer lab, start early. But it is fun!</li>
+<li>Ignore the reading.</li>
+</ul>
 <script>
   $("p").has("img").each(function(){$(this).replaceWith($('<div class="stretch">' + this.innerHTML + '</div>'));});
   $("p").has("iframe").each(function(){$(this).replaceWith($(this.innerHTML));});
